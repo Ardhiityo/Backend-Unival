@@ -1,5 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { router } from '@inertiajs/react';
+import Link from "@tiptap/extension-link";
+import Placeholder from "@tiptap/extension-placeholder";
+import Underline from "@tiptap/extension-underline";
+import { useEditor } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
 import { format } from "date-fns"
 import { ChevronDownIcon, Loader2Icon, X } from "lucide-react";
 import { useState } from "react";
@@ -16,6 +21,7 @@ import { INITIAL_CREATE_NEWS } from "@/constants/news-constant";
 import DashboardLayout from "@/pages/layouts/DashboardLayout";
 import { createNewsSchema } from "@/validations/news-validation";
 import type { CreateNewsForm } from "@/validations/news-validation";
+import { RichEditor } from "../_components/rich-editor";
 
 export default function Page() {
     const { handleSubmit, control, setValue, reset, setError } = useForm({
@@ -48,6 +54,21 @@ export default function Page() {
             },
         });
     }
+
+
+    const editor = useEditor({
+        extensions: [
+            StarterKit,
+            Underline,
+            Link.configure({
+                openOnClick: false,
+            }),
+            Placeholder.configure({
+                placeholder: "Write your description here",
+            }),
+        ],
+        content: "<p>Halo dunia!</p>",
+    });
 
     return (
         <>
@@ -121,13 +142,13 @@ export default function Page() {
                                 control={control}
                                 render={({ field, fieldState }) => (
                                     <Field data-invalid={fieldState.invalid}>
-                                        <FieldLabel htmlFor="description">Description</FieldLabel>
-                                        <Textarea placeholder="Your description here."
-                                            id="description"
-                                            aria-invalid={fieldState.invalid}
-                                            autoComplete="off"
-                                            {...field}
-                                            className="resize-none"
+                                        <FieldLabel htmlFor="description">
+                                            Description
+                                        </FieldLabel>
+                                        <RichEditor
+                                            editor={editor}
+                                            value={field.value}
+                                            onChange={field.onChange}
                                         />
                                         {fieldState.invalid && (
                                             <FieldError
