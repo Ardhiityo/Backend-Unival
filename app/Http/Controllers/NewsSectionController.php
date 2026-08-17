@@ -11,9 +11,16 @@ class NewsSectionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return inertia('dashboard/news/page');
+        $limit = $request->query('limit', 10);
+        $page = $request->query('page', 1);
+
+        $news = NewsSection::select('id', 'title', 'date')
+            ->latest()
+            ->paginate($limit, page: $page);
+
+        return inertia('dashboard/news/page', compact('news'));
     }
 
     /**

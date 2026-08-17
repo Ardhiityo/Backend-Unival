@@ -1,11 +1,22 @@
 import DashboardLayout from "@/pages/layouts/DashboardLayout";
 import NewsManagement from "./_components/news-management";
+import { News } from "@/types/general";
 
-export default function Page() {
+type Props = {
+    news: {
+        current_page: number;
+        per_page: number;
+        data: News[];
+        total: number;
+    };
+};
+
+export default function Page(props: Props) {
+
     return (
         <>
             <h1 className="text-2xl font-semibold">News</h1>
-            <NewsManagement />
+            <NewsManagement props={props.news} />
         </>
     )
 }

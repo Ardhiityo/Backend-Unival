@@ -1,86 +1,75 @@
-import { useState } from "react";
+import { Link } from "@inertiajs/react";
+import { format } from "date-fns";
+import { useMemo, useState } from "react";
+import ActionLabel from "@/components/common/action-label";
+import DataTable from "@/components/common/data-table";
+import DropwdownAction from "@/components/common/dropdown-action";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import type { NewsManagementState } from "@/types/general";
+import { HEADER_TABLE_NEWS } from "@/constants/news-constant";
+import type { News, NewsManagementState } from "@/types/general";
 
-const invoices = [
-    {
-        invoice: "INV001",
-        paymentStatus: "Paid",
-        totalAmount: "$250.00",
-        paymentMethod: "Credit Card",
-    },
-    {
-        invoice: "INV002",
-        paymentStatus: "Pending",
-        totalAmount: "$150.00",
-        paymentMethod: "PayPal",
-    },
-    {
-        invoice: "INV003",
-        paymentStatus: "Unpaid",
-        totalAmount: "$350.00",
-        paymentMethod: "Bank Transfer",
-    },
-    {
-        invoice: "INV004",
-        paymentStatus: "Paid",
-        totalAmount: "$450.00",
-        paymentMethod: "Credit Card",
-    },
-    {
-        invoice: "INV005",
-        paymentStatus: "Paid",
-        totalAmount: "$550.00",
-        paymentMethod: "PayPal",
-    },
-    {
-        invoice: "INV006",
-        paymentStatus: "Pending",
-        totalAmount: "$200.00",
-        paymentMethod: "Bank Transfer",
-    },
-    {
-        invoice: "INV007",
-        paymentStatus: "Unpaid",
-        totalAmount: "$300.00",
-        paymentMethod: "Credit Card",
-    },
-]
+type Props = {
+    current_page: number;
+    per_page: number;
+    data: News[];
+    total: number;
+};
 
-export default function NewsManagement() {
+export default function NewsManagement({ props }: { props: Props }) {
     const [selectedAction, setSelectedAction] = useState<NewsManagementState>(null)
 
+    const news = props.data;
+    const total = props.total;
+    const perPage = props.per_page;
+    const currentPage = props.current_page;
+
+    // const {
+    //     currentRowsPerPage,
+    //     handleSetRowsPerPage,
+    //     currentPages,
+    //     setCurrentPages,
+    // } = useDataTable();
+
+    const data = useMemo(() => {
+        return news.map((item, index) => {
+            return [
+                perPage * (currentPage - 1) + index + 1,
+                format(item.date, "Y-M-d"),
+                item.title,
+                <DropwdownAction
+                    menus={[
+                        {
+                            label: <ActionLabel type="edit" />,
+                            variant: "default",
+                            type: "button",
+                            action: () => {
+                                // 
+                            }
+                        },
+                        {
+                            label: <ActionLabel type="delete" />,
+                            variant: "destructive",
+                            type: "button",
+                            action: () => {
+                                // 
+                            }
+                        }
+                    ]}
+                />
+            ]
+        })
+    }, [news, perPage, currentPage])
+
     return (
-        <>
+        <main className="flex flex-col gap-8">
             <Button
-                className="w-fit self-end"
-                onClick={() => setSelectedAction({ action: "create" })}>
-                Add News
-            </Button>
-            <Card className="py-0 px-5">
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead className="font-semibold">#</TableHead>
-                            <TableHead className="font-semibold">Status</TableHead>
-                            <TableHead className="font-semibold">Method</TableHead>
-                            <TableHead className="font-semibold">Amount</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {invoices.map((invoice) => (
-                            <TableRow key={invoice.invoice}>
-                                <TableCell className="font-medium">{invoice.invoice}</TableCell>
-                                <TableCell>{invoice.paymentStatus}</TableCell>
-                                <TableCell>{invoice.paymentMethod}</TableCell>
-                                <TableCell>{invoice.totalAmount}</TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </Card>
-        </>
+                className="w-fit self-end">
+                <Link href="/news/create">Add News</Link>
+            </Button >
+            <DataTable
+                headers={HEADER_TABLE_NEWS}
+                data={data}
+            />
+        </main>
     );
 }
