@@ -1,3 +1,4 @@
+import { Link, usePage } from "@inertiajs/react"
 import { ChevronRightIcon } from "lucide-react"
 import {
   Collapsible,
@@ -15,6 +16,7 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
+import { cn } from "@/lib/utils"
 
 export function NavMain({
   items,
@@ -30,6 +32,8 @@ export function NavMain({
     }[]
   }[]
 }) {
+  const { url } = usePage();
+
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Content Management System</SidebarGroupLabel>
@@ -42,7 +46,10 @@ export function NavMain({
           >
             <SidebarMenuButton
               tooltip={item.title}
-              render={<a href={item.url} />}
+              render={<Link href={item.url} />}
+              className={cn("my-1", {
+                "bg-primary text-secondary hover:bg-primary hover:text-secondary": item.url === url
+              })}
             >
               {item.icon}
               <span>{item.title}</span>
@@ -62,7 +69,12 @@ export function NavMain({
                   <SidebarMenuSub>
                     {item.items?.map((subItem) => (
                       <SidebarMenuSubItem key={subItem.title}>
-                        <SidebarMenuSubButton render={<a href={subItem.url} />}>
+                        <SidebarMenuSubButton
+                          render={<Link href={subItem.url}
+                            className={cn("my-1", {
+                              "bg-primary text-secondary hover:bg-primary hover:text-secondary": item.url === url
+                            })}
+                          />}>
                           <span>{subItem.title}</span>
                         </SidebarMenuSubButton>
                       </SidebarMenuSubItem>

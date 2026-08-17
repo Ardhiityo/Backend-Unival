@@ -36,7 +36,6 @@ export function DashboardBreadcrumb() {
                                 </BreadcrumbLink>
                             )}
                         </BreadcrumbItem>
-
                         {index + 1 < pathFormatted.length && (
                             <BreadcrumbSeparator />
                         )}

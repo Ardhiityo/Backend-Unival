@@ -91,7 +91,6 @@ export function LoginForm({
                       aria-invalid={fieldState.invalid}
                       placeholder="aryaadi229@gmail.com"
                       autoComplete="off"
-                      required
                       {...field}
                     />
                     {fieldState.invalid && (
@@ -121,9 +120,9 @@ export function LoginForm({
                     <Input
                       id="password"
                       type="password"
-                      required
                       aria-invalid={fieldState.invalid}
                       {...field}
+                      placeholder="your password"
                     />
                     {fieldState.invalid && (
                       <FieldError
@@ -140,13 +139,6 @@ export function LoginForm({
                   ) : (
                     'Login'
                   )}
-                </Button>
-                <Button
-                  variant="outline"
-                  type="button"
-                  form="login"
-                >
-                  Login with Google
                 </Button>
                 <FieldDescription className="text-center">
                   Don&apos;t have an account?{' '}

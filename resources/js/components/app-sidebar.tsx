@@ -1,6 +1,6 @@
 "use client"
 
-import { BotIcon, BookOpenIcon, Settings2Icon, LayoutListIcon } from "lucide-react"
+import { LayoutListIcon, LayoutDashboardIcon } from "lucide-react"
 import * as React from "react"
 import { NavMain } from "@/components/nav-main"
 import { NavUser } from "@/components/nav-user"
@@ -17,88 +17,32 @@ import {
 const data = {
   navMain: [
     {
-      title: "Hero Section",
+      title: "Dashboard",
+      url: "/",
+      icon: (
+        <LayoutDashboardIcon />
+      ),
+    },
+    {
+      title: "News",
       url: "#",
       icon: (
         <LayoutListIcon />
       ),
-    },
-    {
-      title: "Models",
-      url: "#",
-      icon: (
-        <BotIcon
-        />
-      ),
       items: [
         {
-          title: "Genesis",
-          url: "#",
+          title: "All News",
+          url: "/news",
         },
         {
-          title: "Explorer",
-          url: "#",
+          title: "Create News",
+          url: "/news/create",
         },
-        {
-          title: "Quantum",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Documentation",
-      url: "#",
-      icon: (
-        <BookOpenIcon
-        />
-      ),
-      items: [
-        {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Settings",
-      url: "#",
-      icon: (
-        <Settings2Icon
-        />
-      ),
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
-      ],
+      ]
     },
   ],
 }
+
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar variant="inset" {...props}>
@@ -107,7 +51,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" render={<a href="#" />}>
               <div className="flex aspect-square size-8 items-center justify-center rounded-lg">
-                <img src="unival.webp" />
+                <img src="/unival.webp" />
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">Unival</span>

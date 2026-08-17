@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreNewsSection;
 use App\Models\NewsSection;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class NewsSectionController extends Controller
      */
     public function index()
     {
-        //
+        return inertia('dashboard/news/page');
     }
 
     /**
@@ -20,15 +21,23 @@ class NewsSectionController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('dashboard/news/create/page');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreNewsSection $request)
     {
-        //
+        $validated = $request->validated();
+
+        if ($request->file('image')) {
+            $validated['image_url'] = $request->file('image')->store('news', 'public');
+        }
+
+        NewsSection::create($validated);
+
+        return back();
     }
 
     /**
