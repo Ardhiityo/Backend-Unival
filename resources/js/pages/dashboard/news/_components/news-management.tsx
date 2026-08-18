@@ -6,6 +6,7 @@ import DataTable from "@/components/common/data-table";
 import DropwdownAction from "@/components/common/dropdown-action";
 import { Button } from "@/components/ui/button";
 import { HEADER_TABLE_NEWS } from "@/constants/news-constant";
+import { useDataTable } from "@/hooks/use-data-table";
 import type { News, NewsManagementState } from "@/types/general";
 import DialogDeleteNews from "./dialog-delete-news";
 
@@ -20,21 +21,23 @@ export default function NewsManagement({ props }: { props: Props }) {
     const [selectedAction, setSelectedAction] = useState<NewsManagementState>(null)
 
     const news = props.data;
-    // const total = props.total;
-    const perPage = props.per_page;
-    const currentPage = props.current_page;
+    const total = props.total;
 
-    // const {
-    //     currentRowsPerPage,
-    //     handleSetRowsPerPage,
-    //     currentPages,
-    //     setCurrentPages,
-    // } = useDataTable();
+    const {
+        currentPage,
+        currentLimit,
+        handleSetLimit,
+        setCurrentPage
+    } = useDataTable();
+
+    const totalPage = useMemo(() => Math.ceil(total / currentLimit),
+        [total, currentLimit],
+    );
 
     const data = useMemo(() => {
         return news.map((item, index) => {
             return [
-                perPage * (currentPage - 1) + index + 1,
+                currentLimit * (currentPage - 1) + index + 1,
                 format(item.date, "Y-M-d"),
                 item.title,
                 <DropwdownAction
@@ -55,10 +58,38 @@ export default function NewsManagement({ props }: { props: Props }) {
                 />
             ]
         })
-    }, [news, perPage, currentPage])
+    }, [news, currentLimit, currentPage])
+
+    const onLimitChange = (limit: number) => {
+        handleSetLimit(limit);
+        router.get(
+            '/news',
+            {
+                page: 1,
+                limit,
+            },
+            {
+                preserveState: true,
+            },
+        );
+    };
+
+    const onPageChange = (page: number) => {
+        setCurrentPage(page);
+        router.get(
+            '/news',
+            {
+                page: page,
+                limit: currentLimit,
+            },
+            {
+                preserveState: true,
+            },
+        );
+    };
 
     return (
-        <main className="flex flex-col gap-8">
+        <>
             <Button
                 className="w-fit self-end">
                 <Link href="/news/create">Add News</Link>
@@ -66,6 +97,10 @@ export default function NewsManagement({ props }: { props: Props }) {
             <DataTable
                 headers={HEADER_TABLE_NEWS}
                 data={data}
+                totalPage={totalPage}
+                currentPage={currentPage}
+                setCurrentPage={onPageChange}
+                setCurrentLimit={onLimitChange}
             />
             {selectedAction?.action === "delete" && selectedAction.news && (
                 <DialogDeleteNews
@@ -74,6 +109,6 @@ export default function NewsManagement({ props }: { props: Props }) {
                     setOpen={(value) => setSelectedAction(value)}
                 />
             )}
-        </main>
+        </>
     );
 }

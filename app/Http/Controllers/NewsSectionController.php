@@ -14,10 +14,11 @@ class NewsSectionController extends Controller
     public function index(Request $request)
     {
         $page = $request->query('page', 1);
+        $limit = $request->query('limit', 10);
 
         $news = NewsSection::select('id', 'title', 'date')
             ->latest()
-            ->paginate(10, page: $page);
+            ->paginate($limit, page: $page);
 
         return inertia('dashboard/news/page', compact('news'));
     }

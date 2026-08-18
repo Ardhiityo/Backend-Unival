@@ -1,0 +1,2 @@
+export const TABLE_LIMITS = [10, 25, 50, 100];
+export const DEFAULT_TABLE_LIMITS = TABLE_LIMITS[0];
