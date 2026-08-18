@@ -25,7 +25,7 @@ const data = {
     },
     {
       title: "News",
-      url: "#",
+      url: "/news",
       icon: (
         <LayoutListIcon />
       ),

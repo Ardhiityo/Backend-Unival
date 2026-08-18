@@ -38,43 +38,42 @@ export function NavMain({
     <SidebarGroup>
       <SidebarGroupLabel>Content Management System</SidebarGroupLabel>
       <SidebarMenu>
-        {items.map((item) => (
+        {items.map((menu) => (
           <Collapsible
-            key={item.title}
-            defaultOpen={item.isActive}
+            key={menu.title}
+            defaultOpen={url.startsWith(menu.url)}
             render={<SidebarMenuItem />}
           >
             <SidebarMenuButton
-              tooltip={item.title}
-              render={<Link href={item.url} />}
+              tooltip={menu.title}
+              render={menu.items?.length ? <span></span> : <Link href={menu.url} />}
               className={cn("my-1", {
-                "bg-primary text-secondary hover:bg-primary hover:text-secondary": item.url === url
+                "bg-primary text-secondary hover:bg-primary hover:text-secondary":
+                  menu.url === url && !menu.items?.length
               })}
             >
-              {item.icon}
-              <span>{item.title}</span>
+              {menu.icon}{menu.title}
             </SidebarMenuButton>
-            {item.items?.length ? (
+            {menu.items?.length ? (
               <>
                 <CollapsibleTrigger
                   render={
                     <SidebarMenuAction className="aria-expanded:rotate-90" />
                   }
                 >
-                  <ChevronRightIcon
-                  />
+                  <ChevronRightIcon />
                   <span className="sr-only">Toggle</span>
                 </CollapsibleTrigger>
                 <CollapsibleContent>
                   <SidebarMenuSub>
-                    {item.items?.map((subItem) => (
+                    {menu.items?.map((subItem) => (
                       <SidebarMenuSubItem key={subItem.title}>
                         <SidebarMenuSubButton
-                          render={<Link href={subItem.url}
-                            className={cn("my-1", {
-                              "bg-primary text-secondary hover:bg-primary hover:text-secondary": item.url === url
-                            })}
-                          />}>
+                          render={<Link href={subItem.url} />}
+                          className={cn("my-1", {
+                            "bg-black text-white hover:bg-black hover:text-white": subItem.url === url
+                          })}
+                        >
                           <span>{subItem.title}</span>
                         </SidebarMenuSubButton>
                       </SidebarMenuSubItem>
@@ -84,8 +83,9 @@ export function NavMain({
               </>
             ) : null}
           </Collapsible>
-        ))}
-      </SidebarMenu>
-    </SidebarGroup>
+        ))
+        }
+      </SidebarMenu >
+    </SidebarGroup >
   )
 }
