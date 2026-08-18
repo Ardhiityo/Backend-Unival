@@ -9,6 +9,6 @@ export type News = {
 export type NewsManagementState = {
     action: "create",
 } | {
-    action: "update",
+    action: "delete",
     news: News
 } | null 

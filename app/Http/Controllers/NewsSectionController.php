@@ -3,43 +3,36 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreNewsSection;
+use App\Http\Requests\UpdateNewsSection;
 use App\Models\NewsSection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 
 class NewsSectionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
-        $limit = $request->query('limit', 10);
         $page = $request->query('page', 1);
 
         $news = NewsSection::select('id', 'title', 'date')
             ->latest()
-            ->paginate($limit, page: $page);
+            ->paginate(10, page: $page);
 
         return inertia('dashboard/news/page', compact('news'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return inertia('dashboard/news/create/page');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreNewsSection $request)
     {
         $validated = $request->validated();
 
-        if ($request->file('image')) {
-            $validated['image_url'] = $request->file('image')->store('news', 'public');
+        if ($request->hasFile('image')) {
+            $validated['image_url'] = $validated['image']->store('news', 'public');
         }
 
         NewsSection::create($validated);
@@ -47,35 +40,54 @@ class NewsSectionController extends Controller
         return back();
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(NewsSection $newsSection)
     {
-        //
+        return inertia('dashboard/news/edit/page');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(NewsSection $newsSection)
+    public function edit(int $newsId)
     {
-        //
+        $news = NewsSection::find($newsId);
+
+        return inertia('dashboard/news/edit/page', compact('news'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, NewsSection $newsSection)
+    public function update(UpdateNewsSection $request, int $newsId)
     {
-        //
+        $news = NewsSection::find($newsId);
+
+        if (! $news) {
+            throw ValidationException::withMessages(['general' => 'News not found']);
+        }
+
+        $validated = $request->validated();
+
+        if ($request->hasFile('image')) {
+            if (Storage::disk('public')->exists($news->image_url)) {
+                Storage::disk('public')->delete($news->image_url);
+            }
+            $validated['image_url'] = $validated['image']->store('news', 'public');
+        }
+
+        $news->update($validated);
+
+        return back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(NewsSection $newsSection)
+    public function destroy(int $newsId)
     {
-        //
+        $news = NewsSection::find($newsId);
+
+        if (! $news) {
+            throw ValidationException::withMessages(['general' => 'News not found']);
+        }
+
+        if (Storage::disk('public')->exists($news->image_url)) {
+            Storage::disk('public')->delete($news->image_url);
+        }
+
+        $news->delete();
+
+        return back();
     }
 }

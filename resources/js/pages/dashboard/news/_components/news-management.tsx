@@ -1,4 +1,4 @@
-import { Link } from "@inertiajs/react";
+import { Link, router } from "@inertiajs/react";
 import { format } from "date-fns";
 import { useMemo, useState } from "react";
 import ActionLabel from "@/components/common/action-label";
@@ -7,6 +7,7 @@ import DropwdownAction from "@/components/common/dropdown-action";
 import { Button } from "@/components/ui/button";
 import { HEADER_TABLE_NEWS } from "@/constants/news-constant";
 import type { News, NewsManagementState } from "@/types/general";
+import DialogDeleteNews from "./dialog-delete-news";
 
 type Props = {
     current_page: number;
@@ -19,7 +20,7 @@ export default function NewsManagement({ props }: { props: Props }) {
     const [selectedAction, setSelectedAction] = useState<NewsManagementState>(null)
 
     const news = props.data;
-    const total = props.total;
+    // const total = props.total;
     const perPage = props.per_page;
     const currentPage = props.current_page;
 
@@ -42,17 +43,13 @@ export default function NewsManagement({ props }: { props: Props }) {
                             label: <ActionLabel type="edit" />,
                             variant: "default",
                             type: "button",
-                            action: () => {
-                                // 
-                            }
+                            action: () => router.visit(`/news/${item.id}`)
                         },
                         {
                             label: <ActionLabel type="delete" />,
                             variant: "destructive",
                             type: "button",
-                            action: () => {
-                                // 
-                            }
+                            action: () => setSelectedAction({ "action": "delete", news: item })
                         }
                     ]}
                 />
@@ -65,11 +62,18 @@ export default function NewsManagement({ props }: { props: Props }) {
             <Button
                 className="w-fit self-end">
                 <Link href="/news/create">Add News</Link>
-            </Button >
+            </Button>
             <DataTable
                 headers={HEADER_TABLE_NEWS}
                 data={data}
             />
+            {selectedAction?.action === "delete" && selectedAction.news && (
+                <DialogDeleteNews
+                    open={true}
+                    news={selectedAction.news}
+                    setOpen={(value) => setSelectedAction(value)}
+                />
+            )}
         </main>
     );
 }

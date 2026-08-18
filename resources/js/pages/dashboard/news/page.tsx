@@ -1,6 +1,6 @@
 import DashboardLayout from "@/pages/layouts/DashboardLayout";
+import type { News } from "@/types/general";
 import NewsManagement from "./_components/news-management";
-import { News } from "@/types/general";
 
 type Props = {
     news: {
@@ -12,7 +12,6 @@ type Props = {
 };
 
 export default function Page(props: Props) {
-
     return (
         <>
             <h1 className="text-2xl font-semibold">News</h1>

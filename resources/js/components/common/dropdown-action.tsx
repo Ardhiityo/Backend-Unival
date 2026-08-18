@@ -23,10 +23,11 @@ const DropwdownAction = ({ menus }: DropdownActionProps) => {
     return (
         <>
             <DropdownMenu>
-                <DropdownMenuTrigger>
+                <DropdownMenuTrigger render={
                     <Button variant="outline" size="icon" className="size-8">
                         <EllipsisVerticalIcon />
                     </Button>
+                }>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="center">
                     {menus.map((menu, index) => (

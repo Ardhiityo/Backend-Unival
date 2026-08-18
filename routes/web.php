@@ -9,4 +9,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/news', [NewsSectionController::class, 'index']);
     Route::get('/news/create', [NewsSectionController::class, 'create']);
     Route::post('/news/create', [NewsSectionController::class, 'store']);
+    Route::get('/news/{newsId}', [NewsSectionController::class, 'edit']);
+    Route::put('/news/{newsId}', [NewsSectionController::class, 'update']);
+    Route::delete('/news/{newsId}', [NewsSectionController::class, 'destroy']);
 });
