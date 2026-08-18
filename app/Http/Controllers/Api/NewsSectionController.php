@@ -10,7 +10,7 @@ class NewsSectionController extends Controller
 {
     public function index()
     {
-        $news = NewsSection::latest()->paginate(10, page: 1);
+        $news = NewsSection::latest()->cursorPaginate(6);
 
         return NewsSectionResource::collection($news);
     }

@@ -15,7 +15,6 @@ import {
 } from "@/components/ui/card"
 import {
   Field,
-  FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
@@ -140,10 +139,6 @@ export function LoginForm({
                     'Login'
                   )}
                 </Button>
-                <FieldDescription className="text-center">
-                  Don&apos;t have an account?{' '}
-                  <Link href="/register">Sign up</Link>
-                </FieldDescription>
               </Field>
             </FieldGroup>
           </form>

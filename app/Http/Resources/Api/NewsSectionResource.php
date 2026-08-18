@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Api;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -17,7 +18,7 @@ class NewsSectionResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'date' => $this->date,
+            'date' => Carbon::parse($this->date)->translatedFormat('j F Y'),
             'image_url' => asset($this->image_url),
             'description' => $this->description,
         ];
