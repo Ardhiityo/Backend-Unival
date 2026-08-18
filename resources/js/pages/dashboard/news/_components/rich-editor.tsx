@@ -5,6 +5,7 @@ import type {
     Editor,
 } from "@tiptap/react";
 import { useEffect } from "react";
+import { Button } from "@/components/ui/button";
 
 type RichEditorProps = {
     editor: Editor | null;
@@ -55,7 +56,8 @@ export function RichEditor({
         <div className="rounded-md border">
             {/* Toolbar */}
             <div className="flex flex-wrap gap-1 border-b p-2">
-                <button
+                <Button
+                    variant={'outline'}
                     type="button"
                     onClick={() =>
                         editor.chain().focus().toggleBold().run()
@@ -63,8 +65,9 @@ export function RichEditor({
                     className="rounded px-3 py-1 hover:bg-gray-100"
                 >
                     Bold
-                </button>
-                <button
+                </Button>
+                <Button
+                    variant={'outline'}
                     type="button"
                     onClick={() =>
                         editor.chain().focus().toggleItalic().run()
@@ -72,8 +75,9 @@ export function RichEditor({
                     className="rounded px-3 py-1 hover:bg-gray-100"
                 >
                     Italic
-                </button>
-                <button
+                </Button>
+                <Button
+                    variant={'outline'}
                     type="button"
                     onClick={() =>
                         editor.chain().focus().toggleUnderline().run()
@@ -81,8 +85,9 @@ export function RichEditor({
                     className="rounded px-3 py-1 hover:bg-gray-100"
                 >
                     Underline
-                </button>
-                <button
+                </Button>
+                <Button
+                    variant={'outline'}
                     type="button"
                     onClick={() =>
                         editor
@@ -94,8 +99,9 @@ export function RichEditor({
                     className="rounded px-3 py-1 hover:bg-gray-100"
                 >
                     H2
-                </button>
-                <button
+                </Button>
+                <Button
+                    variant={'outline'}
                     type="button"
                     onClick={() =>
                         editor.chain().focus().toggleBulletList().run()
@@ -103,8 +109,9 @@ export function RichEditor({
                     className="rounded px-3 py-1 hover:bg-gray-100"
                 >
                     Bullet
-                </button>
-                <button
+                </Button>
+                <Button
+                    variant={'outline'}
                     type="button"
                     onClick={() =>
                         editor.chain().focus().toggleOrderedList().run()
@@ -112,8 +119,9 @@ export function RichEditor({
                     className="rounded px-3 py-1 hover:bg-gray-100"
                 >
                     Number
-                </button>
-                <button
+                </Button>
+                <Button
+                    variant={'outline'}
                     type="button"
                     onClick={() =>
                         editor.chain().focus().toggleBlockquote().run()
@@ -121,8 +129,9 @@ export function RichEditor({
                     className="rounded px-3 py-1 hover:bg-gray-100"
                 >
                     Quote
-                </button>
-                <button
+                </Button>
+                <Button
+                    variant={'outline'}
                     type="button"
                     onClick={() =>
                         editor.chain().focus().undo().run()
@@ -130,8 +139,9 @@ export function RichEditor({
                     className="rounded px-3 py-1 hover:bg-gray-100"
                 >
                     Undo
-                </button>
-                <button
+                </Button>
+                <Button
+                    variant={'outline'}
                     type="button"
                     onClick={() =>
                         editor.chain().focus().redo().run()
@@ -139,7 +149,7 @@ export function RichEditor({
                     className="rounded px-3 py-1 hover:bg-gray-100"
                 >
                     Redo
-                </button>
+                </Button>
             </div>
             <EditorContent editor={editor} />
         </div>
