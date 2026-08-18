@@ -52,7 +52,7 @@ class FortifyServiceProvider extends ServiceProvider
                 ($credentialId ?: $request->session()->getId()).'|'.$request->ip()
             );
         });
-        
-        Fortify::loginView(fn () => inertia('auth/login'));
+
+        Fortify::loginView(fn () => inertia('auth/login/page'));
     }
 }

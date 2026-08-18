@@ -71,7 +71,7 @@ export function NavMain({
                         <SidebarMenuSubButton
                           render={<Link href={subItem.url} />}
                           className={cn("my-1", {
-                            "bg-black text-white hover:bg-black hover:text-white": subItem.url === url
+                            "bg-primary text-secondary hover:bg-primary hover:text-secondary": subItem.url === url
                           })}
                         >
                           <span>{subItem.title}</span>

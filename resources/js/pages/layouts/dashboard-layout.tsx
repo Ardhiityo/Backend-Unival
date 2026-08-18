@@ -2,6 +2,7 @@
 import { Head } from "@inertiajs/react"
 import type { ReactNode } from "react"
 import { AppSidebar } from "@/components/app-sidebar"
+import { ModeToggle } from "@/components/mode-toggle"
 import { Separator } from "@/components/ui/separator"
 import {
     SidebarInset,
@@ -12,7 +13,7 @@ import { DashboardBreadcrumb } from "../dashboard/_components/dashboard-breadcru
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
     return (
-        <>
+        <main className="relative">
             <Head title="Dashboard" />
             <SidebarProvider>
                 <AppSidebar />
@@ -32,6 +33,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                     </div>
                 </SidebarInset>
             </SidebarProvider>
-        </>
+            <ModeToggle />
+        </main>
     )
 }

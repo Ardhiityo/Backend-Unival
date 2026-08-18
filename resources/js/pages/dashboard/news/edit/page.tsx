@@ -17,7 +17,7 @@ import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field
 import { Input } from "@/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Textarea } from "@/components/ui/textarea";
-import DashboardLayout from "@/pages/layouts/DashboardLayout";
+import DashboardLayout from "@/pages/layouts/dashboard-layout";
 import type { News } from "@/types/general";
 import { updateNewsSchema } from "@/validations/news-validation";
 import type { UpdateNewsForm } from "@/validations/news-validation";

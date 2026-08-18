@@ -18,7 +18,7 @@ import { Input } from "@/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Textarea } from "@/components/ui/textarea";
 import { INITIAL_CREATE_NEWS } from "@/constants/news-constant";
-import DashboardLayout from "@/pages/layouts/DashboardLayout";
+import DashboardLayout from "@/pages/layouts/dashboard-layout";
 import { createNewsSchema } from "@/validations/news-validation";
 import type { CreateNewsForm } from "@/validations/news-validation";
 import { RichEditor } from "../_components/rich-editor";

@@ -1,4 +1,4 @@
-import DashboardLayout from "@/pages/layouts/DashboardLayout";
+import DashboardLayout from "@/pages/layouts/dashboard-layout";
 import type { News } from "@/types/general";
 import NewsManagement from "./_components/news-management";
 
