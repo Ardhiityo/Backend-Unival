@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { Card } from "../ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table";
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "../ui/table";
 import { DataTablePagination } from "./data-table-pagination";
 
 type Props = {
@@ -26,6 +26,8 @@ export default function DataTable(props: Props) {
         <main className="flex flex-col gap-4">
             <Card className="p-0">
                 <Table>
+                    {/* No data found */}
+                    {data.length === 0 && <TableCaption className="py-5">No data found</TableCaption>}
                     <TableHeader className="bg-muted">
                         <TableRow>
                             {headers.map((header, index) => (
@@ -39,6 +41,7 @@ export default function DataTable(props: Props) {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
+                        {/* Data found */}
                         {data.map((rows, rowIndex) => (
                             <TableRow key={`row-index-${rowIndex}`}>
                                 {rows.map((item, index) => (

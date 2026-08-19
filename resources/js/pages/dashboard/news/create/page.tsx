@@ -35,7 +35,7 @@ export default function Page() {
 
     const onSubmit = (data: CreateNewsForm) => {
         setPending(true);
-        router.post('/news/create', data, {
+        router.post('/news', data, {
             forceFormData: true,
             onSuccess: () => {
                 toast.success('News added successfully');
