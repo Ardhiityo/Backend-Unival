@@ -1,3 +1,4 @@
+import { Head } from "@inertiajs/react";
 import DashboardLayout from "@/pages/layouts/dashboard-layout";
 import type { News } from "@/types/general";
 import NewsManagement from "./_components/news-management";
@@ -14,6 +15,7 @@ type Props = {
 export default function Page(props: Props) {
     return (
         <>
+            <Head title="News" />
             <h1 className="text-2xl font-semibold">News</h1>
             <NewsManagement props={props.news} />
         </>

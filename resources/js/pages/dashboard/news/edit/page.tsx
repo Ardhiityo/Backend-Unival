@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { router } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
 import Link from "@tiptap/extension-link";
 import Placeholder from "@tiptap/extension-placeholder";
 import Underline from "@tiptap/extension-underline";
@@ -109,6 +109,7 @@ export default function Page({ news }: { news: News }) {
 
     return (
         <>
+            <Head title="Edit News" />
             <h1 className="text-2xl font-semibold">Update News</h1>
             <Card>
                 <CardHeader>
