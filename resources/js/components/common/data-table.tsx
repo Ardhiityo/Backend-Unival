@@ -27,7 +27,7 @@ export default function DataTable(props: Props) {
             <Card className="p-0">
                 <Table>
                     {/* No data found */}
-                    {data.length === 0 && <TableCaption className="py-5">No data found</TableCaption>}
+                    {data.length === 0 && <TableCaption className="py-5 animate-pulse">No data found</TableCaption>}
                     <TableHeader className="bg-muted">
                         <TableRow>
                             {headers.map((header, index) => (

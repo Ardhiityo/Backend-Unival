@@ -9,6 +9,7 @@ import { useDataTable } from "@/hooks/use-data-table";
 import type { Faculty, FacultyManagementState } from "@/types/general";
 import DialogCreateFaculty from "./dialog-create-faculty";
 import DialogDeleteFaculty from "./dialog-delete-faculty";
+import DialogUpdateFaculty from "./dialog-update-faculty";
 
 type Props = {
     current_page: number;
@@ -108,6 +109,13 @@ export default function FacultyManagement({ props }: { props: Props }) {
                 <DialogCreateFaculty
                     open={true}
                     setOpen={(value) => setSelectedAction(value)}
+                />
+            }
+            {selectedAction?.action === "edit" && selectedAction.faculty &&
+                <DialogUpdateFaculty
+                    open={true}
+                    setOpen={(value) => setSelectedAction(value)}
+                    faculty={selectedAction.faculty}
                 />
             }
             {selectedAction?.action === "delete" && selectedAction.faculty &&

@@ -16,5 +16,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/faculties', [FacultySectionController::class, 'index']);
     Route::post('/faculties', [FacultySectionController::class, 'store']);
+    Route::patch('/faculties/{facultyId}', [FacultySectionController::class, 'update']);
     Route::delete('/faculties/{facultyId}', [FacultySectionController::class, 'destroy']);
 });

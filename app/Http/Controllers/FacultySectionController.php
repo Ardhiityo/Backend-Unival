@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreFacultySection;
+use App\Http\Requests\UpdateFacultySection;
 use App\Models\FacultySection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -18,7 +19,7 @@ class FacultySectionController extends Controller
         $page = $request->query('page', 1);
         $limit = $request->query('limit', 10);
 
-        $faculties = FacultySection::select('id', 'title', 'description')
+        $faculties = FacultySection::select('id', 'title', 'description', 'image_url', 'detail_url')
             ->latest()
             ->paginate($limit, page: $page);
 
@@ -68,9 +69,28 @@ class FacultySectionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, FacultySection $facultySection)
+    public function update(UpdateFacultySection $request, int $facultyId)
     {
-        //
+        $faculty = FacultySection::find($facultyId);
+
+        if (! $faculty) {
+            throw ValidationException::withMessages(['general' => 'Faculty not found']);
+        }
+
+        $validated = $request->validated();
+
+        if ($request->hasFile('image')) {
+            if (Storage::disk('public')->exists($faculty->image_url)) {
+                Storage::disk('public')->delete($faculty->image_url);
+            }
+            $validated['image_url'] = $validated['image']->store('faculties', 'public');
+        } else {
+            $validated['image_url'] = $faculty->image_url;
+        }
+
+        $faculty->update($validated);
+
+        return back();
     }
 
     /**
