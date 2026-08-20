@@ -1,6 +1,6 @@
 "use client"
 
-import { LayoutListIcon, LayoutDashboardIcon, BookOpenTextIcon } from "lucide-react"
+import { LayoutListIcon, LayoutDashboardIcon, BookOpenTextIcon, ListCollapseIcon } from "lucide-react"
 import * as React from "react"
 import { NavMain } from "@/components/nav-main"
 import { NavUser } from "@/components/nav-user"
@@ -45,6 +45,13 @@ const data = {
       url: "/faculties",
       icon: (
         <BookOpenTextIcon />
+      ),
+    },
+    {
+      title: "Services",
+      url: "/services",
+      icon: (
+        <ListCollapseIcon />
       ),
     },
   ],

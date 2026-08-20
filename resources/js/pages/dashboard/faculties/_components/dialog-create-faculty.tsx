@@ -34,7 +34,7 @@ export default function DialogCreateFaculty(props: Props) {
         router.post('/faculties', data, {
             forceFormData: true,
             onSuccess: () => {
-                toast.success('Faculties added successfully');
+                toast.success('Faculty added successfully');
                 reset();
                 setOpen(null);
             },

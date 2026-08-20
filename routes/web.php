@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FacultySectionController;
 use App\Http\Controllers\NewsSectionController;
+use App\Http\Controllers\ServiceSectionController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
@@ -18,4 +19,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/faculties', [FacultySectionController::class, 'store']);
     Route::patch('/faculties/{facultyId}', [FacultySectionController::class, 'update']);
     Route::delete('/faculties/{facultyId}', [FacultySectionController::class, 'destroy']);
+
+    Route::get('/services', [ServiceSectionController::class, 'index']);
+    Route::post('/services', [ServiceSectionController::class, 'store']);
+    Route::patch('/services/{serviceId}', [ServiceSectionController::class, 'update']);
+    Route::delete('/services/{serviceId}', [ServiceSectionController::class, 'destroy']);
 });

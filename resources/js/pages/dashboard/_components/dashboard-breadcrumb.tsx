@@ -1,4 +1,4 @@
-import { usePage } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 import { Fragment } from "react";
 import {
     Breadcrumb,
@@ -28,11 +28,13 @@ export function DashboardBreadcrumb() {
                                 </BreadcrumbPage>
                             ) : (
                                 <BreadcrumbLink
-                                    href={`/${pathFormatted
-                                        .slice(0, index + 1)
-                                        .join("/")}`}
                                 >
-                                    <p className="text-wrap">{path}</p>
+                                    <Link className="text-wrap"
+                                        href={`/${pathFormatted
+                                            .slice(0, index + 1)
+                                            .join("/")}`}>
+                                        {path}
+                                    </Link>
                                 </BreadcrumbLink>
                             )}
                         </BreadcrumbItem>

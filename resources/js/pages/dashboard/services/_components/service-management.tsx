@@ -4,24 +4,24 @@ import ActionLabel from "@/components/common/action-label";
 import DataTable from "@/components/common/data-table";
 import DropwdownAction from "@/components/common/dropdown-action";
 import { Button } from "@/components/ui/button";
-import { HEADER_TABLE_FACULTIES } from "@/constants/faculty-constant";
+import { HEADER_TABLE_SERVICES } from "@/constants/service-constant";
 import { useDataTable } from "@/hooks/use-data-table";
-import type { Faculty, FacultyManagementState } from "@/types/general";
-import DialogCreateFaculty from "./dialog-create-faculty";
-import DialogDeleteFaculty from "./dialog-delete-faculty";
-import DialogUpdateFaculty from "./dialog-update-faculty";
+import type { Service, ServiceManagementState } from "@/types/general";
+import DialogCreateService from "./dialog-create-service";
+import DialogDeleteService from "./dialog-delete-service";
+import DialogUpdateService from "./dialog-update-service";
 
 type Props = {
     current_page: number;
     per_page: number;
-    data: Faculty[];
+    data: Service[];
     total: number;
 };
 
-export default function FacultyManagement({ props }: { props: Props }) {
-    const [selectedAction, setSelectedAction] = useState<FacultyManagementState>(null)
+export default function ServiceManagement({ props }: { props: Props }) {
+    const [selectedAction, setSelectedAction] = useState<ServiceManagementState>(null)
 
-    const faculties = props.data;
+    const services = props.data;
     const total = props.total;
 
     const {
@@ -36,7 +36,7 @@ export default function FacultyManagement({ props }: { props: Props }) {
     );
 
     const data = useMemo(() => {
-        return faculties.map((item, index) => {
+        return services.map((item, index) => {
             return [
                 currentLimit * (currentPage - 1) + index + 1,
                 item.title,
@@ -47,24 +47,24 @@ export default function FacultyManagement({ props }: { props: Props }) {
                             label: <ActionLabel type="edit" />,
                             variant: "default",
                             type: "button",
-                            action: () => setSelectedAction({ "action": "edit", faculty: item })
+                            action: () => setSelectedAction({ "action": "edit", service: item })
                         },
                         {
                             label: <ActionLabel type="delete" />,
                             variant: "destructive",
                             type: "button",
-                            action: () => setSelectedAction({ "action": "delete", faculty: item })
+                            action: () => setSelectedAction({ "action": "delete", service: item })
                         }
                     ]}
                 />
             ]
         })
-    }, [faculties, currentLimit, currentPage])
+    }, [services, currentLimit, currentPage])
 
     const onLimitChange = (limit: number) => {
         handleSetLimit(limit);
         router.get(
-            '/faculties',
+            '/services',
             {
                 page: 1,
                 limit,
@@ -78,7 +78,7 @@ export default function FacultyManagement({ props }: { props: Props }) {
     const onPageChange = (page: number) => {
         setCurrentPage(page);
         router.get(
-            '/faculties',
+            '/services',
             {
                 page: page,
                 limit: currentLimit,
@@ -95,10 +95,10 @@ export default function FacultyManagement({ props }: { props: Props }) {
                 className="w-fit self-end"
                 onClick={() => setSelectedAction({ action: "create" })}
             >
-                Add Faculty
+                Add Service
             </Button>
             <DataTable
-                headers={HEADER_TABLE_FACULTIES}
+                headers={HEADER_TABLE_SERVICES}
                 data={data}
                 totalPage={totalPage}
                 currentPage={currentPage}
@@ -106,23 +106,23 @@ export default function FacultyManagement({ props }: { props: Props }) {
                 setCurrentLimit={onLimitChange}
             />
             {selectedAction?.action === "create" &&
-                <DialogCreateFaculty
+                <DialogCreateService
                     open={true}
                     setOpen={(value) => setSelectedAction(value)}
                 />
             }
-            {selectedAction?.action === "edit" && selectedAction.faculty &&
-                <DialogUpdateFaculty
+            {selectedAction?.action === "edit" && selectedAction.service &&
+                <DialogUpdateService
                     open={true}
                     setOpen={(value) => setSelectedAction(value)}
-                    faculty={selectedAction.faculty}
+                    service={selectedAction.service}
                 />
             }
-            {selectedAction?.action === "delete" && selectedAction.faculty &&
-                <DialogDeleteFaculty
+            {selectedAction?.action === "delete" && selectedAction.service &&
+                <DialogDeleteService
                     open={true}
                     setOpen={(value) => setSelectedAction(value)}
-                    faculty={selectedAction.faculty}
+                    service={selectedAction.service}
                 />
             }
         </>

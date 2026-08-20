@@ -2,64 +2,54 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreServiceSection;
+use App\Http\Requests\UpdateServiceSection;
 use App\Models\ServiceSection;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class ServiceSectionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $page = $request->query('page', 1);
+        $limit = $request->query('limit', 10);
+
+        $news = ServiceSection::select('id', 'title', 'description', 'url')
+            ->latest()
+            ->paginate($limit, page: $page);
+
+        return inertia('dashboard/services/page', compact('news'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(StoreServiceSection $request)
     {
-        //
+        $validated = $request->validated();
+
+        ServiceSection::create($validated);
+
+        return back();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function update(UpdateServiceSection $request, ServiceSection $serviceSection)
     {
-        //
+        $validated = $request->validated();
+
+        ServiceSection::create($validated);
+
+        return back();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(ServiceSection $serviceSection)
+    public function destroy(int $serviceId)
     {
-        //
-    }
+        $service = ServiceSection::find($serviceId);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(ServiceSection $serviceSection)
-    {
-        //
-    }
+        if (! $service) {
+            throw ValidationException::withMessages(['general' => 'Service not found']);
+        }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, ServiceSection $serviceSection)
-    {
-        //
-    }
+        $service->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(ServiceSection $serviceSection)
-    {
-        //
+        return back();
     }
 }

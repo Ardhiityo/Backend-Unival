@@ -14,6 +14,13 @@ export type Faculty = {
     image_url: string
 }
 
+export type Service = {
+    id: number
+    title: string
+    description: string
+    url: string
+}
+
 export type NewsManagementState = {
     action: "create",
 } | {
@@ -26,4 +33,11 @@ export type FacultyManagementState = {
 } | {
     action: "delete" | "edit",
     faculty: Faculty
+} | null
+
+export type ServiceManagementState = {
+    action: "create",
+} | {
+    action: "delete" | "edit",
+    service: Service
 } | null 

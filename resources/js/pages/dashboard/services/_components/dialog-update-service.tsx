@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { router } from '@inertiajs/react';
-import { Loader2Icon, X } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { Loader2Icon } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -9,38 +9,36 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import type { Faculty } from "@/types/general";
-import { updateFacultySchema } from "@/validations/faculty-validation";
-import type { CreateFacultyForm, UpdateFacultyForm } from "@/validations/faculty-validation";
+import type { Service } from "@/types/general";
+import type { CreateServiceForm, UpdateServiceForm } from "@/validations/service-validation";
+import { updateServiceSchema } from "@/validations/service-validation";
 
 type Props = {
     open: boolean,
     setOpen: (value: null) => void,
-    faculty: Faculty
+    service: Service
 }
 
-export default function DialogUpdateFaculty(props: Props) {
-    const { open, setOpen, faculty } = props;
+export default function DialogUpdateService(props: Props) {
+    const { open, setOpen, service } = props;
     const [pending, setPending] = useState(false);
 
-    const [file, setFile] = useState<null | File>(null);
-
     const { handleSubmit, control, setValue, reset, setError } = useForm({
-        resolver: zodResolver(updateFacultySchema)
+        resolver: zodResolver(updateServiceSchema)
     });
 
-    const onSubmit = (data: UpdateFacultyForm) => {
+    const onSubmit = (data: UpdateServiceForm) => {
         setPending(true);
-        router.patch(`/faculties/${faculty.id}`, data, {
+        router.patch(`/services/${service.id}`, data, {
             forceFormData: true,
             onSuccess: () => {
-                toast.success('Faculty updated successfully');
+                toast.success('Service updated successfully');
                 reset();
                 setOpen(null);
             },
             onError: (errors) => {
                 Object.entries(errors).forEach(([field, message]) =>
-                    setError(field as keyof CreateFacultyForm, {
+                    setError(field as keyof CreateServiceForm, {
                         message,
                     }),
                 );
@@ -52,30 +50,21 @@ export default function DialogUpdateFaculty(props: Props) {
     }
 
     useEffect(() => {
-        if (faculty) {
-            setValue("title", faculty.title)
-            setValue("description", faculty.description)
-            setValue("detail_url", faculty.detail_url)
-            setValue("image", null)
+        if (service) {
+            setValue("title", service.title)
+            setValue("description", service.description)
+            setValue("url", service.url)
         }
-    }, [faculty, setValue])
-
-    const imagePreview = useMemo(() => {
-        if (file) {
-            return URL.createObjectURL(file);
-        }
-
-        return `/storage/${faculty.image_url}`;
-    }, [faculty.image_url, file]);
+    }, [service, setValue])
 
     return (
         <Dialog open={open} onOpenChange={() => setOpen(null)}>
-            <form onSubmit={handleSubmit(data => onSubmit(data))} id="update-faculty">
+            <form onSubmit={handleSubmit(data => onSubmit(data))} id="update-service">
                 <DialogContent className="sm:max-w-sm">
                     <DialogHeader>
-                        <DialogTitle>Update Faculty</DialogTitle>
+                        <DialogTitle>Update Service</DialogTitle>
                         <DialogDescription>
-                            Make change faculty here. Click save when you&apos;re
+                            Make change service here. Click save when you&apos;re
                             done.
                         </DialogDescription>
                     </DialogHeader>
@@ -120,16 +109,16 @@ export default function DialogUpdateFaculty(props: Props) {
                                 }
                             />
                             <Controller
-                                name="detail_url"
+                                name="url"
                                 control={control}
                                 render={({ field, fieldState }) =>
                                     <Field data-invalid={fieldState.invalid}>
-                                        <FieldLabel htmlFor="detail_url">Detail Url</FieldLabel>
+                                        <FieldLabel htmlFor="url">Url</FieldLabel>
                                         <Input
-                                            id="detail_url"
+                                            id="url"
                                             {...field}
                                             aria-invalid={fieldState.invalid}
-                                            placeholder="Your detail url here."
+                                            placeholder="Your url here."
                                         />
                                         {fieldState.invalid && (
                                             <FieldError errors={[fieldState.error]} />
@@ -137,50 +126,11 @@ export default function DialogUpdateFaculty(props: Props) {
                                     </Field>
                                 }
                             />
-                            <Controller
-                                name="image"
-                                control={control}
-                                render={({ field, fieldState }) => (
-                                    <>
-                                        <Field data-invalid={fieldState.invalid}>
-                                            <FieldLabel htmlFor="image">Image</FieldLabel>
-                                            <Input placeholder="Your image here."
-                                                id="image"
-                                                type="file"
-                                                accept="image/*"
-                                                aria-invalid={fieldState.invalid}
-                                                onChange={(e) => {
-                                                    const file = e.target.files?.[0];
-
-                                                    if (file) {
-                                                        field.onChange(file)
-                                                        setFile(file)
-                                                    }
-                                                }}
-                                            />
-                                            {fieldState.invalid && (
-                                                <FieldError
-                                                    errors={[fieldState.error]}
-                                                />
-                                            )}
-                                        </Field>
-                                        {imagePreview && (
-                                            <div className="h-44 w-full relative">
-                                                <img src={imagePreview} className="size-full rounded-lg" />
-                                                {`/storage/${faculty.image_url}` != imagePreview && <X className="absolute top-1 right-1 bg-secondary text-primary rounded-full" onClick={() => {
-                                                    setValue("image", null);
-                                                    setFile(null)
-                                                }} />}
-                                            </div>
-                                        )}
-                                    </>
-                                )}
-                            />
                         </FieldGroup>
                     </div>
                     <DialogFooter>
                         <DialogClose render={<Button variant="outline">Cancel</Button>} />
-                        <Button type="submit" form="update-faculty">
+                        <Button type="submit" form="update-service">
                             {pending ? <Loader2Icon className="animate-spin" /> : "Save changes"}</Button>
                     </DialogFooter>
                 </DialogContent>
