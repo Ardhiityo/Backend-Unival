@@ -28,6 +28,13 @@ export type Statistic = {
     total: number
 }
 
+export type HeroSection = {
+    id: number
+    accreditation: string
+    total_industry_partner: number
+    total_number_of_graduate: number
+}
+
 export type NewsManagementState = {
     action: "create",
 } | {
@@ -54,4 +61,11 @@ export type StatisticManagementState = {
 } | {
     action: "delete" | "edit",
     statistic: Statistic
+} | null
+
+export type HeroSectionManagementState = {
+    action: "create",
+} | {
+    action: "delete" | "edit",
+    heroSection: HeroSection
 } | null 

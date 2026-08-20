@@ -13,12 +13,9 @@ return new class extends Migration
     {
         Schema::create('hero_sections', function (Blueprint $table) {
             $table->id();
-            $table->string("title");
-            $table->text("description");
-            $table->string("accreditation");
-            $table->integer("total_industry_partner");
-            $table->integer("total_number_of_graduate");
-            $table->string("image_url");
+            $table->string('accreditation');
+            $table->integer('total_industry_partner');
+            $table->integer('total_number_of_graduate');
             $table->timestamps();
         });
     }

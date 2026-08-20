@@ -1,13 +1,13 @@
 import { Head } from "@inertiajs/react";
 import DashboardLayout from "@/pages/layouts/dashboard-layout";
-import type { Statistic } from "@/types/general";
-import StatisticManagement from "./_components/statistic-management";
+import type { HeroSection } from "@/types/general";
+import HeroSectionManagement from "./_components/hero-section-management";
 
 type Props = {
-    statistics: {
+    hero_sections: {
         current_page: number;
         per_page: number;
-        data: Statistic[];
+        data: HeroSection[];
         total: number;
     };
 };
@@ -15,9 +15,9 @@ type Props = {
 export default function Page(props: Props) {
     return (
         <>
-            <Head title="Statistics" />
-            <h1 className="text-2xl font-semibold">Statistics</h1>
-            <StatisticManagement props={props.statistics} />
+            <Head title="Hero Sections" />
+            <h1 className="text-2xl font-semibold">Hero Sections</h1>
+            <HeroSectionManagement props={props.hero_sections} />
         </>
     )
 }

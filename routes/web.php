@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FacultySectionController;
+use App\Http\Controllers\HeroSectionController;
 use App\Http\Controllers\NewsSectionController;
 use App\Http\Controllers\ServiceSectionController;
 use App\Http\Controllers\StatisticSectionController;
@@ -31,4 +32,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/statistics', [StatisticSectionController::class, 'store']);
     Route::patch('/statistics/{serviceId}', [StatisticSectionController::class, 'update']);
     Route::delete('/statistics/{serviceId}', [StatisticSectionController::class, 'destroy']);
+
+    Route::get('/hero-sections', [HeroSectionController::class, 'index']);
+    Route::post('/hero-sections', [HeroSectionController::class, 'store']);
+    Route::patch('/hero-sections/{serviceId}', [HeroSectionController::class, 'update']);
+    Route::delete('/hero-sections/{serviceId}', [HeroSectionController::class, 'destroy']);
 });

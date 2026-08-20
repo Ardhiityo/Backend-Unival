@@ -1,6 +1,6 @@
 "use client"
 
-import { LayoutListIcon, LayoutDashboardIcon, BookOpenTextIcon, ListCollapseIcon, ChartNoAxesCombinedIcon } from "lucide-react"
+import { LayoutListIcon, LayoutDashboardIcon, BookOpenTextIcon, ListCollapseIcon, ChartNoAxesCombinedIcon, ChartLineIcon } from "lucide-react"
 import * as React from "react"
 import { NavMain } from "@/components/nav-main"
 import { NavUser } from "@/components/nav-user"
@@ -55,7 +55,14 @@ const data = {
       ),
     },
     {
-      title: "Statistics",
+      title: "Hero Sections",
+      url: "/hero-sections",
+      icon: (
+        <ChartLineIcon />
+      ),
+    },
+    {
+      title: "Statistic Sections",
       url: "/statistics",
       icon: (
         <ChartNoAxesCombinedIcon />
