@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index']);
+
     Route::get('/news', [NewsSectionController::class, 'index']);
     Route::get('/news/create', [NewsSectionController::class, 'create']);
     Route::post('/news', [NewsSectionController::class, 'store']);
