@@ -31,11 +31,17 @@ class ServiceSectionController extends Controller
         return back();
     }
 
-    public function update(UpdateServiceSection $request, ServiceSection $serviceSection)
+    public function update(UpdateServiceSection $request, int $serviceId)
     {
+        $service = ServiceSection::find($serviceId);
+
+        if (! $service) {
+            throw ValidationException::withMessages(['general' => 'Service not found']);
+        }
+
         $validated = $request->validated();
 
-        ServiceSection::create($validated);
+        $service->update($validated);
 
         return back();
     }
