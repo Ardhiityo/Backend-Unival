@@ -91,12 +91,12 @@ export default function StatisticManagement({ props }: { props: Props }) {
 
     return (
         <>
-            <Button
+            {total < 3 && <Button
                 className="w-fit self-end"
                 onClick={() => setSelectedAction({ action: "create" })}
             >
                 Add Statistic
-            </Button>
+            </Button>}
             <DataTable
                 headers={HEADER_TABLE_STATISTICS}
                 data={data}
