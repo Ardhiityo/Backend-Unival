@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\FacultySectionController;
 use App\Http\Controllers\Api\NewsSectionController;
 use Illuminate\Support\Facades\Route;
 
@@ -8,3 +9,4 @@ use Illuminate\Support\Facades\Route;
 // })->middleware('auth:sanctum');
 
 Route::get('/news', [NewsSectionController::class, 'index']);
+Route::get('/faculties', [FacultySectionController::class, 'index']);
