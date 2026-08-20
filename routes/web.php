@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FacultySectionController;
 use App\Http\Controllers\NewsSectionController;
 use App\Http\Controllers\ServiceSectionController;
+use App\Http\Controllers\StatisticSectionController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
@@ -24,4 +25,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/services', [ServiceSectionController::class, 'store']);
     Route::patch('/services/{serviceId}', [ServiceSectionController::class, 'update']);
     Route::delete('/services/{serviceId}', [ServiceSectionController::class, 'destroy']);
+
+    Route::get('/statistics', [StatisticSectionController::class, 'index']);
+    Route::post('/statistics', [StatisticSectionController::class, 'store']);
+    Route::patch('/statistics/{serviceId}', [StatisticSectionController::class, 'update']);
+    Route::delete('/statistics/{serviceId}', [StatisticSectionController::class, 'destroy']);
 });

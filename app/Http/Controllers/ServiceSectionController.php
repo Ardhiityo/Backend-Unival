@@ -15,11 +15,11 @@ class ServiceSectionController extends Controller
         $page = $request->query('page', 1);
         $limit = $request->query('limit', 10);
 
-        $news = ServiceSection::select('id', 'title', 'description', 'url')
+        $services = ServiceSection::select('id', 'title', 'description', 'url')
             ->latest()
             ->paginate($limit, page: $page);
 
-        return inertia('dashboard/services/page', compact('news'));
+        return inertia('dashboard/services/page', compact('services'));
     }
 
     public function store(StoreServiceSection $request)

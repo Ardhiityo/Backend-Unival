@@ -21,6 +21,13 @@ export type Service = {
     url: string
 }
 
+export type Statistic = {
+    id: number
+    title: string
+    description: string
+    total: number
+}
+
 export type NewsManagementState = {
     action: "create",
 } | {
@@ -40,4 +47,11 @@ export type ServiceManagementState = {
 } | {
     action: "delete" | "edit",
     service: Service
+} | null
+
+export type StatisticManagementState = {
+    action: "create",
+} | {
+    action: "delete" | "edit",
+    statistic: Statistic
 } | null 

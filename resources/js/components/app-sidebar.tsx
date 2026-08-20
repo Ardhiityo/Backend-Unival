@@ -1,6 +1,6 @@
 "use client"
 
-import { LayoutListIcon, LayoutDashboardIcon, BookOpenTextIcon, ListCollapseIcon } from "lucide-react"
+import { LayoutListIcon, LayoutDashboardIcon, BookOpenTextIcon, ListCollapseIcon, ChartNoAxesCombinedIcon } from "lucide-react"
 import * as React from "react"
 import { NavMain } from "@/components/nav-main"
 import { NavUser } from "@/components/nav-user"
@@ -52,6 +52,13 @@ const data = {
       url: "/services",
       icon: (
         <ListCollapseIcon />
+      ),
+    },
+    {
+      title: "Statistics",
+      url: "/statistics",
+      icon: (
+        <ChartNoAxesCombinedIcon />
       ),
     },
   ],

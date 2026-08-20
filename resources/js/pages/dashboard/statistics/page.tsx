@@ -1,13 +1,13 @@
 import { Head } from "@inertiajs/react";
 import DashboardLayout from "@/pages/layouts/dashboard-layout";
-import type { Service } from "@/types/general";
-import ServiceManagement from "./_components/service-management";
+import type { Statistic } from "@/types/general";
+import StatisticManagement from "./_components/statistic-management";
 
 type Props = {
-    services: {
+    statistics: {
         current_page: number;
         per_page: number;
-        data: Service[];
+        data: Statistic[];
         total: number;
     };
 };
@@ -15,9 +15,9 @@ type Props = {
 export default function Page(props: Props) {
     return (
         <>
-            <Head title="Services" />
+            <Head title="Statistics" />
             <h1 className="text-2xl font-semibold">Services</h1>
-            <ServiceManagement props={props.services} />
+            <StatisticManagement props={props.statistics} />
         </>
     )
 }

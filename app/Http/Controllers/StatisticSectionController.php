@@ -2,64 +2,60 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreStatisticSection;
+use App\Http\Requests\UpdateStatisticSection;
 use App\Models\StatisticSection;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class StatisticSectionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $page = $request->query('page', 1);
+        $limit = $request->query('limit', 10);
+
+        $statistics = StatisticSection::select('id', 'title', 'description', 'total')
+            ->latest()
+            ->paginate($limit, page: $page);
+
+        return inertia('dashboard/statistics/page', compact('statistics'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(StoreStatisticSection $request)
     {
-        //
+        $validated = $request->validated();
+
+        StatisticSection::create($validated);
+
+        return back();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function update(UpdateStatisticSection $request, int $statisticId)
     {
-        //
+        $statistic = StatisticSection::find($statisticId);
+
+        if (! $statistic) {
+            throw ValidationException::withMessages(['general' => 'Statistic not found']);
+        }
+
+        $validated = $request->validated();
+
+        $statistic->update($validated);
+
+        return back();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(StatisticSection $statisticSection)
+    public function destroy(int $statisticId)
     {
-        //
-    }
+        $statistic = StatisticSection::find($statisticId);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(StatisticSection $statisticSection)
-    {
-        //
-    }
+        if (! $statistic) {
+            throw ValidationException::withMessages(['general' => 'Statistic not found']);
+        }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, StatisticSection $statisticSection)
-    {
-        //
-    }
+        $statistic->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(StatisticSection $statisticSection)
-    {
-        //
+        return back();
     }
 }

@@ -9,36 +9,36 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import type { Service } from "@/types/general";
-import type { UpdateServiceForm } from "@/validations/service-validation";
-import { updateServiceSchema } from "@/validations/service-validation";
+import type { Statistic } from "@/types/general";
+import type { UpdateStatisticForm } from "@/validations/statistic-validation";
+import { updateStatisticSchema } from "@/validations/statistic-validation";
 
 type Props = {
     open: boolean,
     setOpen: (value: null) => void,
-    service: Service
+    statistic: Statistic
 }
 
-export default function DialogUpdateService(props: Props) {
-    const { open, setOpen, service } = props;
+export default function DialogUpdateStatistic(props: Props) {
+    const { open, setOpen, statistic } = props;
     const [pending, setPending] = useState(false);
 
     const { handleSubmit, control, setValue, reset, setError } = useForm({
-        resolver: zodResolver(updateServiceSchema)
+        resolver: zodResolver(updateStatisticSchema)
     });
 
-    const onSubmit = (data: UpdateServiceForm) => {
+    const onSubmit = (data: UpdateStatisticForm) => {
         setPending(true);
-        router.patch(`/services/${service.id}`, data, {
+        router.patch(`/statistics/${statistic.id}`, data, {
             forceFormData: true,
             onSuccess: () => {
-                toast.success('Service updated successfully');
+                toast.success('Statistic updated successfully');
                 reset();
                 setOpen(null);
             },
             onError: (errors) => {
                 Object.entries(errors).forEach(([field, message]) =>
-                    setError(field as keyof UpdateServiceForm, {
+                    setError(field as keyof UpdateStatisticForm, {
                         message,
                     }),
                 );
@@ -50,21 +50,21 @@ export default function DialogUpdateService(props: Props) {
     }
 
     useEffect(() => {
-        if (service) {
-            setValue("title", service.title)
-            setValue("description", service.description)
-            setValue("url", service.url)
+        if (statistic) {
+            setValue("title", statistic.title)
+            setValue("description", statistic.description)
+            setValue("total", String(statistic.total))
         }
-    }, [service, setValue])
+    }, [statistic, setValue])
 
     return (
         <Dialog open={open} onOpenChange={() => setOpen(null)}>
-            <form onSubmit={handleSubmit(data => onSubmit(data))} id="update-service">
+            <form onSubmit={handleSubmit(data => onSubmit(data))} id="update-statistic">
                 <DialogContent className="sm:max-w-sm">
                     <DialogHeader>
-                        <DialogTitle>Update Service</DialogTitle>
+                        <DialogTitle>Update Statistic</DialogTitle>
                         <DialogDescription>
-                            Make change service here. Click save when you&apos;re
+                            Make change statistic here. Click save when you&apos;re
                             done.
                         </DialogDescription>
                     </DialogHeader>
@@ -109,16 +109,16 @@ export default function DialogUpdateService(props: Props) {
                                 }
                             />
                             <Controller
-                                name="url"
+                                name="total"
                                 control={control}
                                 render={({ field, fieldState }) =>
                                     <Field data-invalid={fieldState.invalid}>
-                                        <FieldLabel htmlFor="url">Url</FieldLabel>
+                                        <FieldLabel htmlFor="total">Total</FieldLabel>
                                         <Input
-                                            id="url"
+                                            id="total"
                                             {...field}
                                             aria-invalid={fieldState.invalid}
-                                            placeholder="Your url here."
+                                            placeholder="Your total here."
                                         />
                                         {fieldState.invalid && (
                                             <FieldError errors={[fieldState.error]} />
@@ -130,7 +130,7 @@ export default function DialogUpdateService(props: Props) {
                     </div>
                     <DialogFooter>
                         <DialogClose render={<Button variant="outline">Cancel</Button>} />
-                        <Button type="submit" form="update-service">
+                        <Button type="submit" form="update-statistic">
                             {pending ? <Loader2Icon className="animate-spin" /> : "Save changes"}</Button>
                     </DialogFooter>
                 </DialogContent>
