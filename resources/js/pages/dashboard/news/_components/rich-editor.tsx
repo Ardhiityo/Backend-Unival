@@ -90,20 +90,6 @@ export function RichEditor({
                     variant={'outline'}
                     type="button"
                     onClick={() =>
-                        editor
-                            .chain()
-                            .focus()
-                            .toggleHeading({ level: 2 })
-                            .run()
-                    }
-                    className="rounded px-3 py-1 hover:bg-gray-100"
-                >
-                    H2
-                </Button>
-                <Button
-                    variant={'outline'}
-                    type="button"
-                    onClick={() =>
                         editor.chain().focus().toggleBulletList().run()
                     }
                     className="rounded px-3 py-1 hover:bg-gray-100"
