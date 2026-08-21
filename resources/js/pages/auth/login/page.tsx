@@ -1,6 +1,6 @@
 import { Head } from "@inertiajs/react";
-import { LoginForm } from "@/components/login-form";
 import AuthLayout from "../../layouts/auth-layout";
+import { LoginForm } from "./_components/login-form";
 
 export default function Page() {
     return (

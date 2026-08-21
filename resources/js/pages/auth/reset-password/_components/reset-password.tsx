@@ -1,6 +1,6 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Link, router } from '@inertiajs/react';
+import { router } from '@inertiajs/react';
 import { Loader2Icon } from 'lucide-react';
 import { useState } from "react"
 import { useForm, Controller } from 'react-hook-form';
@@ -20,37 +20,30 @@ import {
   FieldLabel,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
-import { INITIAL_LOGIN } from '@/constants/auth-contant'
+import { INITIAL_RESET_PASSWORD } from '@/constants/reset-password-contant';
 import { cn } from "@/lib/utils"
 import {
-  loginSchema
 } from '@/validations/auth-validation';
-import type {
-  LoginForm as LoginFormSchema
-} from '@/validations/auth-validation';
+import type { ResetPasswordForm } from '@/validations/reset-password-validation';
+import { resetPasswordSchema } from '@/validations/reset-password-validation';
 
-export function LoginForm({
-  className,
-  ...props
-}: React.ComponentProps<"div">) {
-
+export function ResetPassword({ token }: { token: string }) {
   const [pending, setPending] = useState(false);
 
   const { setError, control, handleSubmit } = useForm({
-    resolver: zodResolver(loginSchema),
-    defaultValues: INITIAL_LOGIN,
+    resolver: zodResolver(resetPasswordSchema),
+    defaultValues: INITIAL_RESET_PASSWORD
   });
 
-  const onSubmit = (data: LoginFormSchema) => {
+  const onSubmit = (data: ResetPasswordForm) => {
     setPending(true);
-    router.post('/login', data, {
+    router.post('/reset-password', { ...data, token }, {
       onSuccess: () => {
-        toast.success('Login successfully');
-        router.visit('/');
+        toast.success('Reset password successfully');
       },
       onError: (errors) => {
         Object.entries(errors).forEach(([field, message]) =>
-          setError(field as keyof LoginFormSchema, {
+          setError(field as keyof ResetPasswordForm, {
             message,
           }),
         );
@@ -62,17 +55,17 @@ export function LoginForm({
   };
 
   return (
-    <div className={cn('flex flex-col gap-6', className)} {...props}>
+    <div className={cn('flex flex-col gap-6')}>
       <Card>
         <CardHeader>
-          <CardTitle>Login to your account</CardTitle>
+          <CardTitle>Reset your password</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            Enter your new password below to reset password on your account
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form
-            id="login"
+            id="reset-password"
             onSubmit={handleSubmit((data) => onSubmit(data))}
           >
             <FieldGroup>
@@ -105,17 +98,9 @@ export function LoginForm({
                 control={control}
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
-                    <div className="flex items-center">
-                      <FieldLabel htmlFor="password">
-                        Password
-                      </FieldLabel>
-                      <Link
-                        href="#"
-                        className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                      >
-                        Forgot your password?
-                      </Link>
-                    </div>
+                    <FieldLabel htmlFor="password">
+                      Password
+                    </FieldLabel>
                     <Input
                       id="password"
                       type="password"
@@ -131,12 +116,35 @@ export function LoginForm({
                   </Field>
                 )}
               />
+              <Controller
+                name="password_confirmation"
+                control={control}
+                render={({ field, fieldState }) => (
+                  <Field data-invalid={fieldState.invalid}>
+                    <FieldLabel htmlFor="password_confirmation">
+                      Password
+                    </FieldLabel>
+                    <Input
+                      id="password_confirmation"
+                      type="password"
+                      aria-invalid={fieldState.invalid}
+                      {...field}
+                      placeholder="your password confirmation"
+                    />
+                    {fieldState.invalid && (
+                      <FieldError
+                        errors={[fieldState.error]}
+                      />
+                    )}
+                  </Field>
+                )}
+              />
               <Field>
-                <Button type="submit" disabled={pending}>
+                <Button type="submit" disabled={pending} form='reset-password'>
                   {pending ? (
                     <Loader2Icon className="animate-spin" />
                   ) : (
-                    'Login'
+                    'Reset Password'
                   )}
                 </Button>
               </Field>
@@ -144,6 +152,6 @@ export function LoginForm({
           </form>
         </CardContent>
       </Card>
-    </div>
+    </div >
   )
 }
