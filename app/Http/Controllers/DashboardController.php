@@ -26,11 +26,20 @@ class DashboardController extends Controller
             thousands_separator: '.'
         );
 
+        $last_week = Carbon::now()->subWeek()->toDateString();
+        $current_week = Carbon::now()->toDateString();
+
+        $news = NewsSection::orderBy('date')->whereBetween('date', [$last_week, $current_week])->get();
+
         return inertia('dashboard/page', compact(
             'total_news_on_this_month_formatted',
             'news_of_all_time_formatted',
             'services_of_all_time_formatted',
-            'average_news_on_this_month_formatted'
+            'average_news_on_this_month_formatted',
+            'current_date',
+            'current_week',
+            'last_week',
+            'news'
         )
         );
     }
