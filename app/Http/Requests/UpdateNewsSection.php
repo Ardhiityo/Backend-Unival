@@ -17,7 +17,7 @@ class UpdateNewsSection extends FormRequest
             'title' => ['required', 'min:1'],
             'description' => ['required', 'min:1'],
             'date' => ['required', 'date_format:Y-m-d'],
-            'image' => ['required', 'image', 'max:1080'],
+            'image' => ['nullable', 'image', 'max:1080'],
         ];
     }
 }

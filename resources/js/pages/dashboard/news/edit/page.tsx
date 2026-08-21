@@ -7,7 +7,7 @@ import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { format } from "date-fns"
 import { ChevronDownIcon, Loader2Icon, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -28,46 +28,24 @@ export default function Page({ news }: { news: News }) {
         resolver: zodResolver(updateNewsSchema)
     })
 
-    const [imagePreview, setImagePreview] = useState("");
-
-    useEffect(() => {
-        const loadImage = async () => {
-            if (!news.image_url) {
-                return;
-            }
-
-            const response = await fetch(
-                `/storage/${news.image_url}`
-            );
-
-            if (!response.ok) {
-                toast.error("Gagal mengambil gambar");
-            }
-
-            const blob = await response.blob();
-
-            const file = new File(
-                [blob],
-                news.image_url.split("/").pop() ?? "image.jpg",
-                {
-                    type: blob.type,
-                }
-            );
-
-            setValue("image", file);
-            setImagePreview(URL.createObjectURL(file));
-        };
-
-        loadImage();
-    }, [news.image_url, setValue]);
-
     useEffect(() => {
         if (news) {
             setValue("title", news.title);
             setValue("date", String(news.date));
             setValue("description", news.description);
+            setValue("image", null)
         }
     }, [news, setValue])
+
+    const [file, setFile] = useState<null | File>(null);
+
+    const imagePreview = useMemo(() => {
+        if (file) {
+            return URL.createObjectURL(file);
+        }
+
+        return `/storage/${news.image_url}`;
+    }, [news.image_url, file]);
 
     const editor = useEditor({
         extensions: [
@@ -213,9 +191,9 @@ export default function Page({ news }: { news: News }) {
 
                                                     if (file) {
                                                         field.onChange(file)
-                                                        const objectUrl = URL.createObjectURL(file)
-                                                        setImagePreview(objectUrl)
+                                                        setFile(file)
                                                     }
+
                                                 }}
                                             />
                                             {fieldState.invalid && (
@@ -227,10 +205,10 @@ export default function Page({ news }: { news: News }) {
                                         {imagePreview && (
                                             <div className="w-fit relative">
                                                 <img src={imagePreview} className="h-72 rounded-lg" />
-                                                <X className="absolute top-1 right-1 bg-secondary text-primary rounded-full" onClick={() => {
-                                                    setValue("image", "");
-                                                    setImagePreview("")
-                                                }} />
+                                                {`/storage/${news.image_url}` != imagePreview && <X className="absolute top-1 right-1 bg-secondary text-primary rounded-full" onClick={() => {
+                                                    setValue("image", null);
+                                                    setFile(null)
+                                                }} />}
                                             </div>
                                         )}
                                     </>

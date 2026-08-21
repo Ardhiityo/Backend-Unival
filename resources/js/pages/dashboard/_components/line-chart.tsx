@@ -31,8 +31,6 @@ export default function LineCharts(props: Props) {
         return dates;
     }, [news]);
 
-    console.log(data);
-
     return (
         <LineChart
             style={{

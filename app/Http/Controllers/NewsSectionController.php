@@ -68,6 +68,8 @@ class NewsSectionController extends Controller
                 Storage::disk('public')->delete($news->image_url);
             }
             $validated['image_url'] = $validated['image']->store('news', 'public');
+        } else {
+            $validated['image_url'] = $news->image_url;
         }
 
         $news->update($validated);
