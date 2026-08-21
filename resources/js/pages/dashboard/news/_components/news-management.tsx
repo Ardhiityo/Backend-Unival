@@ -38,7 +38,7 @@ export default function NewsManagement({ props }: { props: Props }) {
         return news.map((item, index) => {
             return [
                 currentLimit * (currentPage - 1) + index + 1,
-                format(item.date, "Y-M-d"),
+                format(item.date, "yyyy-MM-d"),
                 item.title,
                 <DropwdownAction
                     menus={[

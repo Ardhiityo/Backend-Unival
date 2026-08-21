@@ -28,13 +28,15 @@ export function DashboardBreadcrumb() {
                                 </BreadcrumbPage>
                             ) : (
                                 <BreadcrumbLink
+                                    render={
+                                        <Link className="text-wrap"
+                                            href={`/${pathFormatted
+                                                .slice(0, index + 1)
+                                                .join("/")}`}>
+                                            {path}
+                                        </Link>
+                                    }
                                 >
-                                    <Link className="text-wrap"
-                                        href={`/${pathFormatted
-                                            .slice(0, index + 1)
-                                            .join("/")}`}>
-                                        {path}
-                                    </Link>
                                 </BreadcrumbLink>
                             )}
                         </BreadcrumbItem>

@@ -69,12 +69,11 @@ export function NavMain({
                     {menu.items?.map((subItem) => (
                       <SidebarMenuSubItem key={subItem.title}>
                         <SidebarMenuSubButton
-                          render={<Link href={subItem.url} />}
+                          render={<Link href={subItem.url}>{subItem.title}</Link>}
                           className={cn("my-1", {
                             "bg-primary text-secondary hover:bg-primary hover:text-secondary": subItem.url === url
                           })}
                         >
-                          <span>{subItem.title}</span>
                         </SidebarMenuSubButton>
                       </SidebarMenuSubItem>
                     ))}

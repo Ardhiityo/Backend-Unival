@@ -121,7 +121,9 @@ export default function Page({ news }: { news: News }) {
                                                     id="date"
                                                     mode="single"
                                                     selected={field.value ? new Date(field.value) : undefined}
-                                                    onSelect={(date) => field.onChange(format(String(date), "yyyy-MM-dd"))}
+                                                    onSelect={
+                                                        (date) => date ? field.onChange(format(date, 'yyyy-MM-dd')) : null
+                                                    }
                                                     defaultMonth={new Date()}
                                                 />
                                             </PopoverContent>
