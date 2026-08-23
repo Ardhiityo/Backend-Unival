@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FacultySectionController;
 use App\Http\Controllers\HeroSectionController;
 use App\Http\Controllers\NewsSectionController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceSectionController;
 use App\Http\Controllers\StatisticSectionController;
 use Illuminate\Support\Facades\Route;
@@ -37,4 +38,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/hero-sections', [HeroSectionController::class, 'store']);
     Route::patch('/hero-sections/{serviceId}', [HeroSectionController::class, 'update']);
     Route::delete('/hero-sections/{serviceId}', [HeroSectionController::class, 'destroy']);
+
+    Route::put('/profiles/{userId}', [ProfileController::class, 'update']);
 });
