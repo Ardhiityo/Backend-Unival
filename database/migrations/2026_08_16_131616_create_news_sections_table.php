@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('news_sections', function (Blueprint $table) {
             $table->id();
-            $table->string("title");
-            $table->text("description");
-            $table->date("date");
-            $table->string("image_url");
+            $table->string('title');
+            $table->text('description');
+            $table->date('date');
+            $table->string('image_url')->nullable();
             $table->timestamps();
         });
     }

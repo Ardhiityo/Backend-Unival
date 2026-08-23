@@ -14,7 +14,7 @@ class NewsSectionResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'date' => Carbon::parse($this->date)->translatedFormat('j F Y'),
-            'image_url' => asset($this->image_url),
+            'image_url' => $this->image_url ? asset($this->image_url) : null,
             'description' => $this->description,
         ];
     }
