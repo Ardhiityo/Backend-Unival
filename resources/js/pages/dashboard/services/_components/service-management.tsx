@@ -39,8 +39,8 @@ export default function ServiceManagement({ props }: { props: Props }) {
         return services.map((item, index) => {
             return [
                 currentLimit * (currentPage - 1) + index + 1,
-                item.title,
-                item.description,
+                <span className="text-wrap">{item.title}</span>,
+                <span className="text-wrap">{item.description}</span>,
                 <DropwdownAction
                     menus={[
                         {

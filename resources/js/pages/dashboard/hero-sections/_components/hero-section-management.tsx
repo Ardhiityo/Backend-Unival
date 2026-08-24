@@ -39,7 +39,7 @@ export default function HeroSectionManagement({ props }: { props: Props }) {
         return heroSections.map((item, index) => {
             return [
                 currentLimit * (currentPage - 1) + index + 1,
-                item.accreditation,
+                <span className="text-wrap">{item.accreditation}</span>,
                 item.total_industry_partner,
                 item.total_number_of_graduate,
                 <DropwdownAction

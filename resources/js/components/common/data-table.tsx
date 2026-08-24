@@ -32,7 +32,7 @@ export default function DataTable(props: Props) {
                         <TableRow>
                             {headers.map((header, index) => (
                                 <TableHead
-                                    className="font-semibold py-3 text-center"
+                                    className="font-semibold py-3 px-5"
                                     key={`${header}-${index}`}
                                 >
                                     {header}
@@ -46,7 +46,7 @@ export default function DataTable(props: Props) {
                             <TableRow key={`row-index-${rowIndex}`}>
                                 {rows.map((item, index) => (
                                     <TableCell
-                                        className="font-medium text-center max-w-20"
+                                        className="font-medium px-5"
                                         key={`data-index-${index}`}
                                     >
                                         {item}
