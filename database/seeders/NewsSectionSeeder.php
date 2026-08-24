@@ -85,7 +85,7 @@ class NewsSectionSeeder extends Seeder
                 'created_at' => '2023-07-27 11:12:01',
                 'updated_at' => '2023-07-27 11:12:01',
             ],
-            [,
+            [
                 'title' => 'Hadir Universitas Al-Khairiyah dalam Acara Kemitraan IKM Logam Kota Cilegon',
                 'description' => 'Dekan FT UNIVAL menghadiri acara Kemitraan IKM Logam Kota Cilegon bersama Wali Kota Helldy Agustian & Dirjen IKMA Kemenperin.',
                 'date' => '2023-08-01',
@@ -93,7 +93,7 @@ class NewsSectionSeeder extends Seeder
                 'created_at' => '2023-08-01 09:36:43',
                 'updated_at' => '2023-08-01 09:36:43',
             ],
-            [,
+            [
                 'title' => 'Universitas Al-Khairiyah di Undang Walikota Kota Cilegon dalam acara FGD Pembahasan Policy Brief',
                 'description' => 'Dekan FEB UNIVAL hadir FGD Pembahasan Policy Brief di The Royale Krakatau, mengusulkan sinergi Pentahelix & regulasi UMKM.',
                 'date' => '2023-08-01',
@@ -101,7 +101,7 @@ class NewsSectionSeeder extends Seeder
                 'created_at' => '2023-08-01 17:35:37',
                 'updated_at' => '2023-08-01 17:35:37',
             ],
-            [,
+            [
                 'title' => 'Universitas Al-Khairiyah Ikut Serta Dalam Menurunkan Stunting Kota Cilegon',
                 'description' => 'Humas UNIVAL menghadiri penandatanganan Pakta Integritas dalam acara Rembuk Stunting Kota Cilegon di Bappeda.',
                 'date' => '2023-08-01',
@@ -109,7 +109,7 @@ class NewsSectionSeeder extends Seeder
                 'created_at' => '2023-08-01 17:59:28',
                 'updated_at' => '2023-08-01 17:59:28',
             ],
-            [,
+            [
                 'title' => 'UNIVAL MENGHADIRI UNDANGAN LLDIKTIIV TERKAIT PENYUSUNAN PROPOSAL PENELITIAN DOSEN PEMULA',
                 'description' => 'Erlina Sari Pohan (Dosen FEB UNIVAL) mewakili kampus dalam Bimtek Penyusunan Proposal Penelitian Dosen Pemula LLDIKTI IV di Bandung.',
                 'date' => '2023-08-04',
@@ -117,7 +117,7 @@ class NewsSectionSeeder extends Seeder
                 'created_at' => '2023-08-04 03:44:19',
                 'updated_at' => '2023-08-04 03:44:19',
             ],
-            [,
+            [
                 'title' => 'MAHASISWA DAN DOSEN PENDAMPING LAPANGAN KAMPUS MENGAJAR BERKUNJUNG KE DINAS PENDIDIKAN KOTA CILEGON',
                 'description' => '8 mahasiswa & 1 DPL Kampus Mengajar Angkatan 6 dari UNIVAL bersilaturahmi dan koordinasi ke Dindik Kota Cilegon.',
                 'date' => '2023-08-04',
@@ -125,7 +125,7 @@ class NewsSectionSeeder extends Seeder
                 'created_at' => '2023-08-04 04:13:58',
                 'updated_at' => '2023-08-04 04:13:58',
             ],
-            [,
+            [
                 'title' => '10 Mahasiswa UNIVAL Mengkuti KKN Tematik PTM2D Wilayah Jabar dan Banten',
                 'description' => 'Pelepasan 10 mahasiswa UNIVAL KKN Tematik PTM2D LLDIKTI IV di Kabupaten Serang (Petir, Anyer, Pulo Panjang).',
                 'date' => '2023-08-20',
@@ -133,7 +133,7 @@ class NewsSectionSeeder extends Seeder
                 'created_at' => '2023-08-20 01:05:27',
                 'updated_at' => '2023-08-20 01:05:27',
             ],
-            [,
+            [
                 'title' => 'DEKAN DAN PRODI FAKULTAS EKONOMI BISNIS DAN FAKULTAS ILMU KOMPUTER MENGUNJUNGI MAHASISWANYA YANG SEDANG MENGIKUTI KEGIATAN KKN TEMATIK LLDIKTI WILAYAH IV',
                 'description' => 'Dekan FEB & FIK mengunjungi posko KKN Tematik LLDIKTI IV di Pulau Panjang dan Petir, Kabupaten Serang.',
                 'date' => '2023-09-04',
@@ -141,7 +141,7 @@ class NewsSectionSeeder extends Seeder
                 'created_at' => '2023-09-04 02:44:49',
                 'updated_at' => '2023-09-04 02:44:49',
             ],
-            [,
+            [
                 'title' => 'RAPAT DOSEN BERASAMA PIMPINAN UNIVAL TERKAIT AJARAN BARU GANJIL TAHUN AKADEMIK 2023/2024',
                 'description' => 'Rapat umum dosen semester ganjil TA 2023/2024 dipimpin Rektor & Warek I untuk penyamaan persepsi pembelajaran.',
                 'date' => '2023-09-04',
@@ -149,7 +149,7 @@ class NewsSectionSeeder extends Seeder
                 'created_at' => '2023-09-04 02:57:05',
                 'updated_at' => '2023-09-04 02:57:05',
             ],
-            [,
+            [
                 'title' => 'Fakultas Ekonomi Bisnis (FEB) Universitas Al-Khairiyah Menandatangani Perjanjian Kerjasama Dengan PT Krakatau Sarana Properti (KSP)',
                 'description' => 'Penandatanganan PKS antara FEB UNIVAL dan PT KSP untuk Tri Dharma, kurikulum industri, dan pengembangan SDM.',
                 'date' => '2023-09-08',
@@ -157,7 +157,7 @@ class NewsSectionSeeder extends Seeder
                 'created_at' => '2023-09-08 14:18:41',
                 'updated_at' => '2023-09-08 14:18:41',
             ],
-            [,
+            [
                 'title' => 'Fakultas Ilmu Komputer (FIK), Fakultas Ekonomi Bisnis (FEB), Fakultas Teknik (FT), dan Fakultas Agama Islam (FAI) mengadakan sosialisasi Tentang Sistem Akademik (SIAK) kepada Mahasiswa Baru',
                 'description' => 'Sosialisasi Sistem Informasi Akademik (SIAK) bagi mahasiswa baru tahun ajaran 2023/2024 oleh Biro SIAK UNIVAL.',
                 'date' => '2023-09-08',
@@ -165,7 +165,7 @@ class NewsSectionSeeder extends Seeder
                 'created_at' => '2023-09-08 14:42:17',
                 'updated_at' => '2023-09-08 14:42:17',
             ],
-            [,
+            [
                 'title' => 'Kunjungan LPPM UNIVAL ke PT BlueScope',
                 'description' => 'LPPM UNIVAL menyerahkan laporan pertanggungjawaban pendistribusian hibah Booth Container UMKM kepada jajaran direksi PT BlueScope.',
                 'date' => '2023-09-08',
@@ -173,7 +173,7 @@ class NewsSectionSeeder extends Seeder
                 'created_at' => '2023-09-08 15:10:52',
                 'updated_at' => '2023-09-08 15:10:52',
             ],
-            [,
+            [
                 'title' => 'Wisuda Perguruan Tinggi Al-Khairiyah, Haji Mumu Pesankan Mahasiswa Berilmu Semakin Taat Dan Berbakti Kepada Orangtua',
                 'description' => "Wisuda Sarjana & D3 Angkatan III UNIVAL dan XII STIT Al-Khairiyah di Aula Brigjen KH Syam'un, orasi ilmiah oleh Yandri Susanto (Wakil Ketua MPR RI).",
                 'date' => '2023-12-04',
@@ -181,7 +181,7 @@ class NewsSectionSeeder extends Seeder
                 'created_at' => '2023-12-04 07:29:22',
                 'updated_at' => '2023-12-04 07:29:22',
             ],
-            [,
+            [
                 'title' => 'Melalui Tri Dharma Perguruan Tinggi, Universitas Al-Khairiyah Ikut Serta Dalam Kegiatan KKN Tematik PTM2D',
                 'description' => 'UNIVAL memaparkan hasil Kegiatan KKN Tematik PTM2D Desa Pulau Panjang di kantor LLDIKTI IV.',
                 'date' => '2023-12-04',
@@ -189,7 +189,7 @@ class NewsSectionSeeder extends Seeder
                 'created_at' => '2023-12-04 10:21:15',
                 'updated_at' => '2023-12-04 10:21:15',
             ],
-            [,
+            [
                 'title' => 'Band UNIVAL Raih Juara ke-3 di Festival Band 10 Musik UPI Serang',
                 'description' => 'UKM UNIVAL Band meraih juara 3 dalam Festival Band 10 Musik se-Banten di Universitas Pendidikan Indonesia (UPI) Serang.',
                 'date' => '2023-12-07',
@@ -197,7 +197,7 @@ class NewsSectionSeeder extends Seeder
                 'created_at' => '2023-12-07 01:42:24',
                 'updated_at' => '2023-12-07 01:42:24',
             ],
-            [,
+            [
                 'title' => 'Jalin Kerjasama, Universitas Al-Khairiyah MoU Dengan PT. Raffa Helical Bronze',
                 'description' => 'Penandatanganan MoU kerjasama pendidikan, pemagangan, dan beasiswa antara UNIVAL dan PT. Raffa Helical Bronze.',
                 'date' => '2023-12-07',
@@ -205,7 +205,7 @@ class NewsSectionSeeder extends Seeder
                 'created_at' => '2023-12-07 04:45:06',
                 'updated_at' => '2023-12-07 04:45:06',
             ],
-            [,
+            [
                 'title' => 'Fakultas Ekonomi Bisnis (FEB) Al-Khairiyah Menggelar Lomba Debat & Seminar Ekonomi',
                 'description' => 'FEB UNIVAL menggelar Lomba Debat & Seminar Ekonomi dengan narasumber Lina Mardiyah (CEO PT Sinar Selira Interfood) dan Nita Mardiyana.',
                 'date' => '2023-12-07',
@@ -213,7 +213,7 @@ class NewsSectionSeeder extends Seeder
                 'created_at' => '2023-12-07 05:34:27',
                 'updated_at' => '2023-12-07 05:34:27',
             ],
-            [,
+            [
                 'title' => 'Mahasiswa Universitas Al-Khairiyah (UNIVAL) Ikut Gelaran BJTC 1 PWI',
                 'description' => 'Mahasiswa UNIVAL ikutan Banten Journalist Training Camp (BJTC 1) PWI Banten di Taman Wisata MBS Serang.',
                 'date' => '2023-12-08',
@@ -221,7 +221,7 @@ class NewsSectionSeeder extends Seeder
                 'created_at' => '2023-12-08 03:39:39',
                 'updated_at' => '2023-12-08 03:39:39',
             ],
-            [,
+            [
                 'title' => 'Juara 1 Nasional Lomba Konten Kreator, Mahasiswa Disabilitas dari UNIVAL Ini Diundang Brownis Trans TV',
                 'description' => 'Fauzi, mahasiswa disabilitas Prodi Teknik Informatika UNIVAL juara 1 Lomba Konten Kreator Kominfo, diundang sebagai bintang tamu Brownis Trans TV.',
                 'date' => '2023-12-09',

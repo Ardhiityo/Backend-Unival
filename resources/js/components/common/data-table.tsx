@@ -46,7 +46,7 @@ export default function DataTable(props: Props) {
                             <TableRow key={`row-index-${rowIndex}`}>
                                 {rows.map((item, index) => (
                                     <TableCell
-                                        className="font-medium text-center"
+                                        className="font-medium text-center max-w-20"
                                         key={`data-index-${index}`}
                                     >
                                         {item}

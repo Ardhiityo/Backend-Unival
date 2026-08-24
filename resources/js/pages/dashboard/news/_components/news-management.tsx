@@ -38,8 +38,8 @@ export default function NewsManagement({ props }: { props: Props }) {
         return news.map((item, index) => {
             return [
                 currentLimit * (currentPage - 1) + index + 1,
+                <p className="text-wrap">{item.title}</p>,
                 format(item.date, "yyyy-MM-d"),
-                item.title,
                 <DropwdownAction
                     menus={[
                         {

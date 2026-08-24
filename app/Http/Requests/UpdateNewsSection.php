@@ -13,8 +13,10 @@ class UpdateNewsSection extends FormRequest
 
     public function rules(): array
     {
+        $id = $this->route('newsId');
+
         return [
-            'title' => ['required', 'min:1'],
+            'title' => ['required', 'min:1', 'unique:news_sections,slug,'.$id.',id'],
             'description' => ['required', 'min:1'],
             'date' => ['required', 'date_format:Y-m-d'],
             'image' => ['nullable', 'image', 'max:1080'],
