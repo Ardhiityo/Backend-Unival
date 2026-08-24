@@ -4,6 +4,7 @@ namespace App\Http\Resources\Api;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class FacultySectionResource extends JsonResource
 {
@@ -11,7 +12,7 @@ class FacultySectionResource extends JsonResource
     {
         return [
             'title' => $this->title,
-            'image_url' => asset($this->image_url),
+            'image_url' => Storage::disk('public')->url($this->image_url),
             'description' => $this->description,
             'detail_url' => $this->detail_url,
         ];
