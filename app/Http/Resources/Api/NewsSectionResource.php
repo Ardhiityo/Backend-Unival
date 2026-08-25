@@ -11,12 +11,22 @@ class NewsSectionResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
+        $image_url = $this->image_url;
+
+        if ($image_url) {
+            $disk = Storage::disk('public');
+
+            if ($disk->exists($image_url)) {
+                $image_url = $disk->url($image_url);
+            }
+        }
+
         return [
             'id' => $this->id,
             'title' => $this->title,
             'slug' => $this->slug,
             'date' => Carbon::parse($this->date)->translatedFormat('j F Y'),
-            'image_url' => Storage::disk('public')->exists($this->image_url) ? Storage::disk('public')->url(this->image_url) : ($this->image_url ? $this->image_url : null),
+            'image_url' => $image_url,
             'description' => $this->description,
         ];
     }

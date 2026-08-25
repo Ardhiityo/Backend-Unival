@@ -10,7 +10,9 @@ class NewsSectionController extends Controller
 {
     public function index()
     {
-        $news = NewsSection::latest()->cursorPaginate(3);
+        $news = NewsSection::query()
+            ->orderByDesc('id')
+            ->cursorPaginate(3);
 
         return NewsSectionResource::collection($news);
     }
