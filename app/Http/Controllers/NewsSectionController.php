@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateNewsSection;
 use App\Models\NewsSection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
 class NewsSectionController extends Controller
@@ -31,6 +32,14 @@ class NewsSectionController extends Controller
     public function store(StoreNewsSection $request)
     {
         $validated = $request->validated();
+
+        $slug = Str::slug($validated['title']);
+
+        $slug_is_exists = NewsSection::where('slug', $slug)->exists();
+
+        if ($slug_is_exists) {
+            throw ValidationException::withMessages(['title' => 'The title has already been taken.']);
+        }
 
         if ($request->hasFile('image')) {
             $validated['image_url'] = $validated['image']->store('news', 'public');
@@ -62,6 +71,14 @@ class NewsSectionController extends Controller
         }
 
         $validated = $request->validated();
+
+        $slug = Str::slug($validated['title']);
+
+        $slug_is_exists = NewsSection::where('id', '!=', $news->id)->where('slug', $slug)->exists();
+
+        if ($slug_is_exists) {
+            throw ValidationException::withMessages(['title' => 'The title has already been taken.']);
+        }
 
         if ($request->hasFile('image')) {
             if (Storage::disk('public')->exists($news->image_url)) {

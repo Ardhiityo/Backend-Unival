@@ -14,4 +14,19 @@ class NewsSectionController extends Controller
 
         return NewsSectionResource::collection($news);
     }
+
+    public function show(string $slug)
+    {
+        $news = NewsSection::where('slug', $slug)->first();
+
+        if (! $news) {
+            return response()->json([
+                'error' => [
+                    'message' => 'News not found',
+                ],
+            ], status: 404);
+        }
+
+        return new NewsSectionResource($news);
+    }
 }

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 // })->middleware('auth:sanctum');
 
 Route::get('/news', [NewsSectionController::class, 'index']);
+Route::get('/news/{slug}', [NewsSectionController::class, 'show']);
 Route::get('/faculties', [FacultySectionController::class, 'index']);
 Route::get('/services', [ServiceSectionControlller::class, 'index']);
 Route::get('/statistics', [StatisticSectionController::class, 'index']);

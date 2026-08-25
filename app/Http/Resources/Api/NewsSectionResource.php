@@ -14,6 +14,7 @@ class NewsSectionResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
+            'slug' => $this->slug,
             'date' => Carbon::parse($this->date)->translatedFormat('j F Y'),
             'image_url' => Storage::disk('public')->exists($this->image_url) ? Storage::disk('public')->url(this->image_url) : ($this->image_url ? $this->image_url : null),
             'description' => $this->description,
