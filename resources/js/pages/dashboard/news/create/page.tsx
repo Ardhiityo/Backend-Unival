@@ -190,8 +190,8 @@ export default function Page() {
                                             )}
                                         </Field>
                                         {imagePreview && (
-                                            <div className="size-auto relative">
-                                                <img src={imagePreview} className="size-full rounded-lg" />
+                                            <div className="w-fit relative">
+                                                <img src={imagePreview} className="h-72 rounded-lg" />
                                                 <X className="absolute top-1 right-1 bg-secondary text-primary rounded-full" onClick={() => {
                                                     setValue("image", "");
                                                     setImagePreview("")
