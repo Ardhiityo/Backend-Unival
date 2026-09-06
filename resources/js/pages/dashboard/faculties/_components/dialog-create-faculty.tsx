@@ -164,7 +164,7 @@ export default function DialogCreateFaculty(props: Props) {
                     </div>
                     <DialogFooter>
                         <DialogClose render={<Button variant="outline">Cancel</Button>} />
-                        <Button type="submit" form="create-faculty">
+                        <Button type="submit" form="create-faculty" disabled={pending}>
                             {pending ? <Loader2Icon className="animate-spin" /> : "Save changes"}</Button>
                     </DialogFooter>
                 </DialogContent>

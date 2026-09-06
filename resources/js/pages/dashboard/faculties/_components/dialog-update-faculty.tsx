@@ -180,7 +180,7 @@ export default function DialogUpdateFaculty(props: Props) {
                     </div>
                     <DialogFooter>
                         <DialogClose render={<Button variant="outline">Cancel</Button>} />
-                        <Button type="submit" form="update-faculty">
+                        <Button type="submit" form="update-faculty" disabled={pending}>
                             {pending ? <Loader2Icon className="animate-spin" /> : "Save changes"}</Button>
                     </DialogFooter>
                 </DialogContent>

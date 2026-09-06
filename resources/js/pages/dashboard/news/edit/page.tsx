@@ -224,7 +224,7 @@ export default function Page({ news }: { news: News }) {
                         <Button type="button" variant="outline" onClick={() => reset()}>
                             Reset
                         </Button>
-                        <Button type="submit" form="create-news">
+                        <Button type="submit" form="create-news" disabled={pending}>
                             {pending ? <Loader2Icon className="animate-spin" /> : "Submit"}
                         </Button>
                     </Field>

@@ -122,7 +122,7 @@ export default function DialogCreateStatistic(props: Props) {
                     </div>
                     <DialogFooter>
                         <DialogClose render={<Button variant="outline">Cancel</Button>} />
-                        <Button type="submit" form="create-statistic">
+                        <Button type="submit" form="create-statistic" disabled={pending}>
                             {pending ? <Loader2Icon className="animate-spin" /> : "Save changes"}</Button>
                     </DialogFooter>
                 </DialogContent>
