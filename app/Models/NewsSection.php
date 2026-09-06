@@ -20,5 +20,8 @@ class NewsSection extends Model
         static::creating(function ($model) {
             $model->slug = Str::slug($model->title);
         });
+        static::updating(function ($model) {
+            $model->slug = Str::slug($model->title);
+        });
     }
 }
