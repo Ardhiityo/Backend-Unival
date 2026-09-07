@@ -12,7 +12,7 @@ class NewsSectionController extends Controller
     {
         $news = NewsSection::query()
             ->orderByDesc('id')
-            ->cursorPaginate(3);
+            ->cursorPaginate(6);
 
         return NewsSectionResource::collection($news);
     }
