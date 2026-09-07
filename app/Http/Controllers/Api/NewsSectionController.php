@@ -11,7 +11,7 @@ class NewsSectionController extends Controller
     public function index()
     {
         $news = NewsSection::query()
-            ->orderByDesc('id')
+            ->orderByDesc('date')
             ->cursorPaginate(6);
 
         return NewsSectionResource::collection($news);
