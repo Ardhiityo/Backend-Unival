@@ -30,6 +30,7 @@ export default function Page() {
     })
 
     const [pending, setPending] = useState(false);
+    const [fileInputKey, setFileInputKey] = useState(0);
 
     const [imagePreview, setImagePreview] = useState("");
 
@@ -40,7 +41,8 @@ export default function Page() {
             onSuccess: () => {
                 toast.success('News added successfully');
                 reset();
-                router.visit('/news');
+                setImagePreview("");
+                setFileInputKey(prev => prev + 1)
             },
             onError: (errors) => {
                 Object.entries(errors).forEach(([field, message]) =>
@@ -171,6 +173,7 @@ export default function Page() {
                                             <Input placeholder="Your image here."
                                                 id="image"
                                                 type="file"
+                                                key={fileInputKey}
                                                 accept="image/*"
                                                 aria-invalid={fieldState.invalid}
                                                 onChange={(e) => {
